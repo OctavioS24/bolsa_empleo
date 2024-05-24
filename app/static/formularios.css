@@ -1,0 +1,351 @@
+
+/*----------------------------------------------------------*/
+body {
+    background-color: #e8e8e8;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    color: #338c36;
+    font-family: "ubuntu", sans-serif;
+  }
+  
+  h3 {
+    text-align: center;
+    font-size: 20px;
+    font-family: "ubuntu", sans-serif;
+  }
+  
+  h1 {
+    font-size: 16px;
+    font-family: "ubuntu", sans-serif;
+  }
+  /*----------------------------------------------------------*/
+  .separador {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .separador hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 2px solid #338c36;
+  }
+  
+  .separador span {
+    color: #338c36;
+  }
+  /*----------------------------------------------------------*/
+  
+  form {
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 50px;
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  .grupo {
+    margin-bottom: 20px;
+  }
+  
+  div .grupo {
+    background-color: #f1f3f4;
+    padding: 20px;
+    border-radius: 30px;
+    border-bottom: 2px solid #338c36;
+  }
+  
+  div .boton {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  label, p {
+    display: block;
+    font-weight: bold;
+    font-family: "ubuntu", sans-serif;
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  input, select {
+    width: 90%;
+    background-color: #f1f3f4;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 12pt;
+    margin: 20px;
+    border-bottom: 1px solid black;
+    font-family: "ubuntu", sans-serif;
+  }
+  
+  input:hover {
+    border-bottom: 3px solid #338c36;
+  }
+  
+  input:focus {
+    border-bottom: 1px solid #338c36;
+    border-left: 5px solid #338c36; /* Establece un borde izquierdo de color verde cuando el input está enfocado */
+  }
+  
+  div .grupoGenero {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .contenedor-par {
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    justify-content: space-between; /* Espacio uniforme entre los elementos */
+  }
+  
+  .grupo2 {
+    padding: 20px;
+    flex: 1; /* Que cada elemento ocupe el mismo espacio */
+    margin-right: 20px; /* Espacio entre los campos */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .contenedor-par {
+    border-radius: 30px;
+    border: 2px solid #338c36;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .input-par, .imagen, .residencia {
+    background-color: #fff;
+  }
+  
+  #imagen-preview {
+    margin: 10px;
+    background-color: #ccc;
+    display: inline-block;
+  }
+  
+  input[type="file"] {
+    width: 85%; /* Ancho completo */
+    padding: 5px; /* Espaciado interno */
+    border: none;
+  }
+  
+  /* Estilo para el botón de "Elegir archivo" */
+  input[type="file"]::-webkit-file-upload-button {
+    width: auto; /* Cambiado a ancho automático */
+    max-width: 100%; /* El botón no excederá el ancho del contenedor */
+    background-color: #338c36;
+    color: #fff;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo adicional para cuando el botón está activo o enfocado */
+  input[type="file"]::-webkit-file-upload-button:active,
+  input[type="file"]::-webkit-file-upload-button:focus {
+    opacity: 0.8;
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  input[type="radio"] {
+    width: 15px;
+  }
+  
+  input[type="checkbox"] {
+    width: 15px;
+  }
+  
+  select:hover {
+    border-bottom: 3px solid #338c36;
+  }
+  
+  select:focus {
+    border-bottom: 1px solid #338c36;
+    border-left: 5px solid #338c36;
+  }
+  
+  select {
+    width: 90%;
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  @media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+  
+    input, select, textarea {
+        width: 90%;
+        font-size: 14px;
+    }
+  
+    form {
+        padding: 20px;
+    }
+  
+    label, p {
+        font-size: 14px;
+    }
+  
+    button, .button-confirmar {
+        width: 100%;
+    }
+  
+    .separador {
+        display: none;
+    }
+  
+    .contenedor-par {
+        flex-direction: column;
+    }
+  
+    .grupo2 {
+        margin-right: 0;
+    }
+  
+    #imagen-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+    }
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  /* Estilos base para los botones */
+  button, .button-confirmar {
+    width: auto; /* Cambiado a ancho automático */
+    max-width: 100%; /* El botón no excederá el ancho del contenedor */
+    background-color: #338c36;
+    color: #fff;
+    border: none;
+    padding: 14px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
+  }
+  
+  /* Estilos para los botones cuando se les hace hover */
+  button:hover, .button-confirmar:hover {
+    opacity: 0.8; /* Cambiado a 0.8 para que la opacidad sea un valor decimal */
+  }
+  
+  /* Estilos para el contenedor de botones */
+  .imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .botones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h4 {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+  }
+  /*----------------------------------------------------------*/
+  
+  input.error {
+    border: 1px solid red;
+  }
+  
+  textarea.error {
+    border: 1px solid red;
+  }
+  
+  .residencia.error {
+    border: 1px solid red;
+  }
+  
+  /* Estilo del mensaje de error */
+  .error-message {
+    color: red;
+    font-size: 10px;
+    margin-top: 3px; /* Espacio superior para separar el mensaje del campo de entrada */
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  textarea {
+    background-color: #e9ebec;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 12pt;
+    margin: 20px;
+    border-bottom: 1px solid black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 90%;
+    height: 90px;
+    overflow: auto;
+    resize: none;
+  }
+  
+  textarea::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  /* Estilo para el pulgar de la barra de desplazamiento */
+  textarea::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del pulgar */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+  }
+  
+  /* Estilo para la pista de la barra de desplazamiento */
+  textarea::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color de fondo de la pista */
+  }
+  
+  textarea:hover {
+    border-bottom: 3px solid #338c36;
+  }
+  
+  textarea:focus {
+    border-bottom: 1px solid #338c36;
+    border-left: 5px solid #338c36;
+  }
+  
+  /*----------------------------------------------------------*/
+  
+  select {
+    color: #338c36;
+  }
+  
+  option {
+    background-color: #fff;
+    color: #338c36;
+    font-size: 15px;
+  }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../static/IMG/Logo_Iso color.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+     <!--Estilos del Mensaje-->
+  <style>
+    .msg{
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      font-weight: 600;
+      width: 80%;
+      color: #fff;
+      background: #338c36;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+    }
+</style>
+
+</head>
+<body>
+    
+</body>
+<main>
+    <nav class="main-menu">
+      <h1>Portal de Empleo</h1>
+      <img class="logo" src="../static/IMG/iso blanco y.png" alt="" />
+      <ul>
+        
+        <li class="nav-item active" data-form="descarga" onclick=" mostrarFormulario('descarga')">
+          <b></b>
+          <b></b>
+          <a href="#">
+            <i class="fa fa-download nav-icon"></i>
+            <span class="nav-text">Descarga</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <section class="content">
+      <div class="left-content">
+
+
+<!-----------------------HTML D.Personales------------------------->
+  <div class="container-general">
+
+
+  {% if msg %}
+  <p class="msg">{{ msg }}</p>
+  {% endif %}
+
+
+      <!------------------------------------------------>
+  <form action = "{{ url_for('descargar_pdf')}}" method="POST"  onsubmit="return mostrarMensajeConfirmacion()">
+             
+
+        <div class="container" id="descarga">
+
+          <a class="cta" href="/descargar_pdf">
+            <span>Descargar PDF</span>
+            <svg width="13px" height="10px" viewBox="0 0 13 10">
+              <path d="M1,5 L11,5"></path>
+              <polyline points="8 1 12 5 8 9"></polyline>
+            </svg>
+          </a>
+
+        </div>
+
+    </form>
+  </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-menu">
+        <div class="friends-activity">
+          <h1>Novedades</h1>
+          <div class="card-container">
+            <div class="card">
+              <div class="button_ir">
+                <button class="buttons"><a href="https://ar.linkedin.com/company/hause-m%C3%B6bel"> Ver Mas...</a></button>
+              </div>
+              <div class="card-user-info">
+                <img src="https://www.hause-mobel.com.ar/wp-content/uploads/2022/06/hausemobel.jpg" alt="" />
+                <h2>Hause Mobel</h2>
+              </div>
+              <img class="card-img" src="../static/IMG/unrecognizable-woman-sitting-desk-office-typing-keyboard.jpg" alt="" />
+              <p class="titulo"><strong>Oportunidad Laboral</strong><br></p></div> 
+
+            </div>
+
+                <div class="card">
+                  <div class="button_ir">
+                    <button class="buttons" ><a href="https://careers.holcimgroup.com/holcim_argentina/go/Empleos-en-Holcim-Argentina/8822102/"> Ver Mas...</a></button>
+                  </div>
+                  <div class="card-user-info">
+                    <img src="../static/IMG/IMAGEN LOGO.png" alt="" />
+                    <h2>Holcim S.A</h2>
+                  </div>
+                  <img class="card-img" src="../static/IMG/videoframe_0.png" alt="" />
+                  <p><strong>Oportunidades Laborales</strong><br></p>
+                </div> 
+                <br>
+                </div></div>
+                
+    </section>
+  </main>
+
+<script>
+    //---------------Funcion de Mensaje------------------------
+
+    setTimeout(function(){
+        elementoP = document.querySelector('.msg');
+        elementoP.style.display = 'none';
+    }, 3000);
+
+</script>
+
+</html>

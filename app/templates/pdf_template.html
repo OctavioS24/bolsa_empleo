@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nombre_persona }} - Curriculum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Ubuntu", sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            position: relative; /* Añadido para posicionamiento relativo */
+        }
+        .container {
+            width: 920px; /* El 70% del ancho de la ventana */
+            margin: auto;
+            padding: 15px;
+            display: table; /* Cambio en la visualización */
+            background-color: #333;
+            height: 1100px; /* Altura automática */
+        }
+        .contact, .data {
+            width: 60%;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #338c36;
+            color: #fff;
+            display: table-cell; /* Cambio en la visualización */
+            vertical-align: top; /* Alinear arriba */
+        }
+        .contact {
+            width: 40%; /* Ajuste del ancho */
+        }
+        .data {
+            width: 500px;
+            background-color: #fff;
+            color: black;
+        }
+        .section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+            color: #338c36;
+            text-align: center;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .container-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px; /* Ajusta la altura según tus necesidades */
+            overflow: hidden; /* Esto asegurará que la imagen se recorte si es necesario */
+            text-align: center;
+        }
+        .cara {
+            border-radius: 100%;
+            max-width: 150px; /* Ajusta el tamaño máximo de la imagen según tus necesidades */
+            width: 100%;
+            height: auto;
+        }
+        .logo1 {
+            width: 150px;  /* Ancho fijo */
+            height: 50px; /* Altura fija */
+            object-fit: contain; /* Mantiene la relación de aspecto */
+            margin-top: 5px; /* Margen superior para separación */
+        }
+
+        .logo2 {
+            width: 180px;  /* Ancho fijo */
+            height: 50px; /* Altura fija */
+            object-fit: contain; /* Mantiene la relación de aspecto */
+            margin-top: 5px; /* Margen superior para separación */
+        }
+
+        .container-imagen {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Espacio entre elementos */
+            flex-wrap: wrap; /* Para que las imágenes se ajusten si no caben en una línea */
+        }
+
+        .container-imagen img {
+            margin: 5px; /* Ajusta el margen según tus necesidades */
+        }
+        .container-personales {
+            background-color: #79bd7b;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .nombre {
+            text-align: center;
+        }
+
+        .nota {
+            font-size: 14px;
+            color: #808080;
+        }
+
+        .fixed-width {
+            width: 600px; /* Ajusta este valor según tus necesidades */
+            word-wrap: break-word; /* Permite que el texto se ajuste a la línea si es demasiado largo */
+            font-size: 14px
+        }
+
+        .dp {
+           font-weight: bold;
+           font-size: 16px
+        }
+    </style> 
+</head>
+<body>
+    <div class="container">
+        <div class="contact">
+            <br>
+            <div class="container-img">
+                <img class="cara" src="data:image/jpg;base64,{{ imagen_base64 }}" alt="Mi imagen">
+            </div>
+            <br>
+            <br>
+            <h2 class="nombre">{{ datos_personales['nombre']}} {{datos_personales['apellido'] }}</h2>
+            <br>
+            <div class="container-personales">
+                <h3>Datos Personales</h3>
+                <p>Fecha de Nacimiento: {{ datos_personales['nacimiento']}}</p>
+                <p>Domicilio: {{ datos_personales['domicilio']}}</p>
+                <p>Lugar de Residencia: {{ datos_personales['residencia']}}</p>
+                <p>Género: 
+                {{ datos_personales['genero']}}
+                </p>
+            </div>
+            <br>
+            <h3>Contacto</h3>
+            
+            <p class="dp">Teléfono: {{ datos_personales['telefono']}}</p>
+            
+            <p class="dp">Email: {{ datos_personales['correo']}}</p>
+            
+            <h3>Idioma</h3>
+            <p>
+            {{ datos_personales['idioma']}}
+            </p>
+            <h3>Aptitudes</h3> 
+            <p>
+            {{ datos_personales['aptitudes']}}
+            </p>
+        </div>
+
+        <div class="data">
+            <div class="section"> 
+                <br>
+                <h2>Educación</h2>
+                <br>
+                <p>· Institución Educativa: {{ formacion_academica['institucion']}}</p>
+                <p>· Especialidad: {{ formacion_academica['especialidad']}}</p>
+                <p>· Duración: {{ formacion_academica['inicio']}} - {{ formacion_academica['fin']}}</p>
+                <p>· Grado: {{ formacion_academica['grado']}}</p>
+                {% if notasFormacion_vacias %}
+                <h3>Formación Adicional:</h3>
+                <p class="fixed-width">{{ formacion_academica['notasFormacion']}} </p>
+                {% endif %}
+            </div>
+            <div class="section">
+                <br>
+                <h2>Experiencia Laboral</h2>
+                <br>
+                <p>·Empresa: {{ experiencia_laboral['empresa']}}</p>
+                <p>·Rol: {{ experiencia_laboral['descripcion']}}</p>
+                <p>·Resumen de las Tareas Desarrolladas:</p>
+                <p class="fixed-width">{{ experiencia_laboral['tareas']}}</p>
+                <p>·Duración: {{ experiencia_laboral['desde']}} - {{ experiencia_laboral['hasta']}}</p>
+                {% if notasExperiencia_vacias %}
+                <h3>Experiencia Adicional:</h3>
+                <p class="fixed-width">{{ experiencia_laboral['notasExperiencia']}}</p>
+                {% endif %}
+            </div>
+            
+            <div class="container-imagen">
+                <p class="nota">Curriculum Vitae generado desde Plataforma de Empleo de:</p>
+                <img class="logo1" src="data:image/jpg;base64,{{ logo1 }}" alt="Logo1">
+                <img class="logo2" src="data:image/jpg;base64,{{ logo2 }}" alt="Logo2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
