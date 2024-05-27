@@ -17,6 +17,10 @@ app = Flask(__name__)
 def inicio():
     return render_template('index.html')
 
+@app.route('/formulario')
+def formulario():
+    return render_template('formulario.html')
+
 
 @app.route('/from', methods = ['GET', 'POST'])
 def registrarForm():
@@ -67,107 +71,107 @@ def registrarForm():
 
         if not validacionNombre(nombre):
             error_nombre = "El nombre no es valido. Debe contener solo letras y menos de 40 caracteres"
-            return render_template('index.html', error_nombre = error_nombre, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_nombre = error_nombre, msg='¡Falta completar campos o datos no validos!')
 
         if not validacionApellido(apellido):
             error_apellido = "El apellido no es valido. Debe contener solo letras y menos de 40 caracteres"
-            return render_template('index.html', error_apellido = error_apellido, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_apellido = error_apellido, msg='¡Falta completar campos o datos no validos!')
         
         if not validacionImagen(imagen):
             error_imagen = "El formato de la imagen no es válido. Debe ser jpg "
-            return render_template('index.html', error_imagen=error_imagen, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_imagen=error_imagen, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_edad(edad):
             error_edad = "La edad no corresponde. Debe ser mayor de 18 años"
-            return render_template('index.html', error_edad = error_edad, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_edad = error_edad, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_nacimiento(nacimiento):
             error_nacimiento = "La fecha no es correcta"
-            return render_template('index.html', error_nacimiento = error_nacimiento, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_nacimiento = error_nacimiento, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_genero(genero):
             error_genero = "Debe seleccionar uno"
-            return render_template('index.html', error_genero = error_genero, msg= '¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_genero = error_genero, msg= '¡Falta completar campos o datos no validos!')
 
         if not validar_correo(correo, confirmar_correo):
             error_correo = "Los correos no coisiden"
-            return render_template('index.html', error_correo = error_correo, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_correo = error_correo, msg='¡Falta completar campos o datos no validos!')
         
         if not validacionCalle(calle):
             error_calle = "La calle no es valido. Debe tener menos de 40 caracteres"
-            return render_template('index.html', error_calle = error_calle, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_calle = error_calle, msg='¡Falta completar campos o datos no validos!')
         
         if not validacionNumeracion(numeracion):
             error_numeracion = "Debe ingresar solo numeros"
-            return render_template('index.html', error_numeracion = error_numeracion, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_numeracion = error_numeracion, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_residencia(residencia):
             error_residencia = "Seleccione un Lugar de Residencia"
-            return render_template('index.html', error_residencia = error_residencia, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_residencia = error_residencia, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_telefono(telefono):
             error_telefono = "No se permiten caracteres de tipo letras"
-            return render_template('index.html', error_telefono = error_telefono, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_telefono = error_telefono, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_idioma(idioma):
             error_idioma = "Selecione uno"
-            return render_template('index.html', error_idioma=error_idioma, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_idioma=error_idioma, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_aptitudes(aptitudes):
             error_aptitudes = "Selecione uno"
-            return render_template('index.html', error_aptitudes=error_aptitudes, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_aptitudes=error_aptitudes, msg='¡Falta completar campos o datos no validos!')
         
         #------------------------Validacion de F.Academica--------------------------------
 
         if not validar_institucion(institucion):
             error_institucion = " Debe contener solo letras y menos de 40 caracteres"
-            return render_template('index.html', error_institucion = error_institucion, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_institucion = error_institucion, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_especialidad(especialidad):
             error_especialidad = "Debe seleccionar uno"
-            return render_template('index.html', error_especialidad = error_especialidad, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_especialidad = error_especialidad, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_inicio(inicio):
             error_inicio = "La fecha no corresponde. Debe ser desde 1970 en adelante"
-            return render_template('index.html', error_inicio = error_inicio, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_inicio = error_inicio, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_fin(inicio, fin):
             error_fin = "La fecha no corresponde. Debe ser mayor a la de inicialización"
-            return render_template('index.html', error_fin = error_fin, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_fin = error_fin, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_grado(grado):
             error_grado = "Debe seleccionar uno"
-            return render_template('index.html', error_grado = error_grado, msg= '¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_grado = error_grado, msg= '¡Falta completar campos o datos no validos!')
         
         if not validar_notasFormacion(notasFormacion):
             error_notasFormacion = "Debe contener menos de 200 caracteres"
-            return render_template('index.html', error_notasFormacion = error_notasFormacion, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_notasFormacion = error_notasFormacion, msg='¡Falta completar campos o datos no validos!')
         
         #------------------------Validacion de E.Laboral--------------------------------
 
         if not validar_descripcion(descripcion):
             error_descripcion = " Debe contener menos de 400 caracteres"
-            return render_template('index.html', error_descripcion = error_descripcion, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_descripcion = error_descripcion, msg='¡Falta completar campos o datos no validos!')
 
         if not validar_Empresa(empresa):
             error_empresa = " Debe contener solo letras y menos de 40 caracteres"
-            return render_template('index.html', error_empresa = error_empresa, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_empresa = error_empresa, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_tareas(tareas):
             error_tareas = " Debe contener menos de 200 caracteres"
-            return render_template('index.html', error_tareas = error_tareas, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_tareas = error_tareas, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_desde(desde):
             error_desde = "La fecha no corresponde. Debe ser desde 1970 en adelante"
-            return render_template('index.html', error_desde = error_desde, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_desde = error_desde, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_hasta(desde, hasta):
             error_hasta = "La fecha no corresponde. Debe ser mayor a la de inicialización"
-            return render_template('index.html', error_hasta = error_hasta, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_hasta = error_hasta, msg='¡Falta completar campos o datos no validos!')
         
         if not validar_notasExperiencia(notasExperiencia):
             error_notasExperiencia = "Debe contener menos de 200 caracteres"
-            return render_template('index.html', error_notasExperiencia = error_notasExperiencia, msg='¡Falta completar campos o datos no validos!')
+            return render_template('formulario.html', error_notasExperiencia = error_notasExperiencia, msg='¡Falta completar campos o datos no validos!')
 
         #--------------------------------------------
         # Abrir la imagen con PIL
@@ -222,7 +226,7 @@ def registrarForm():
 
         return render_template("descarga.html", msg='¡Postulación Enviada!')
     else:
-        return render_template("index.html", msg='¡Error!')
+        return render_template("formulario.html", msg='¡Error!')
 
 
 def verificar_notas_formacion_vacias():
@@ -313,7 +317,8 @@ def descargar_pdf():
     rendered = render_template('pdf_template.html',datos_personales = datos_personales, formacion_academica = formacion_academica, experiencia_laboral = experiencia_laboral, imagen_base64=imagen_base64, notasFormacion_vacias=notasFormacion_vacias, notasExperiencia_vacias=notasExperiencia_vacias, logo1=logo1, logo2=logo2)
 
     options = {
-        'enable-local-file-access': None
+        'enable-local-file-access': None,
+        'page-size': 'A4'
         }
 
     # Convierte el HTML renderizado a PDF utilizando la configuración proporcionada

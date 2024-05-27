@@ -1,0 +1,76 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+}
+
+.loader {
+    display: block;
+    width: 240px;
+    height: 240px;
+    position: relative;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #338c36;
+    transform: translate(-50%, -100%) scale(0);
+    animation: push_401 2s infinite linear;
+}
+
+.loader:after {
+    animation-delay: 1s;
+}
+
+@keyframes push_401 {
+    0%,
+    50% {
+        transform: translate(-50%, 0%) scale(1);
+    }
+
+    100% {
+        transform: translate(-50%, -100%) scale(0);
+    }
+}
+
+.loader img {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+    z-index: 1; /* Asegura que la imagen esté por encima de los elementos animados */
+}
+
+input {
+    width: auto; /* Cambiado a ancho automático */
+    max-width: 100%; /* El botón no excederá el ancho del contenedor */
+    background-color: #338c36;
+    color: #fff;
+    text-decoration: none; /* Para quitar el subrayado predeterminado */
+    display: inline-block; /* Para que el elemento se comporte como un bloque */
+    padding: 14px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 40px;
+    box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
+    font-size: 20px;
+}
+
+input:hover {
+    opacity: 0.8; /* Cambiado a 0.8 para que la opacidad sea un valor decimal */
+}

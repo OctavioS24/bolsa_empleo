@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+  <script  src="script.js"></script>
+  <link rel="icon" href="../static/IMG/Logo_Iso color.png">
+  <meta charset="UTF-8">
+  <title>Empleo Malagueño</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'><link rel="stylesheet" href="../static/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .msg{
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      font-weight: 600;
+      width: 80%;
+      color: #fff;
+      background: #338c36;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+    }
+</style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+    <main>
+      <nav class="main-menu">
+        <h1>Portal de Empleo</h1>
+        <img class="logo" src="../static/IMG/iso blanco y.png" alt="" />
+        <ul>
+          <li class="nav-item active" data-form="form1" onclick="mostrarFormulario('form1')">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-user nav-icon"></i>
+              <span class="nav-text">D. Personales</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-form="form2" onclick="mostrarFormulario('form2')">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-graduation-cap nav-icon"></i>
+              <span class="nav-text">Educación</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-form="form3" onclick=" mostrarFormulario('form3')">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-briefcase nav-icon"></i>
+              <span class="nav-text">Experiencia</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+  <section class="content">
+  <div class="left-content">
+    <div class="container-general">
+
+
+    {% if msg %}
+    <p class="msg">{{ msg }}</p>
+    {% endif %}
+
+
+        <!------------------------------------------------>
+    <form action = "{{ url_for('registrarForm')}}" method="POST"  onsubmit="return mostrarMensajeConfirmacion()" enctype="multipart/form-data">
+                <div class="container" id="form1">
+                    <h2>Datos Personales</h2>
+                    <br>
+                    <div class="separador">
+                        <hr />
+                        <span> 0 </span>
+                        <hr />
+                    </div>
+                    <br>
+                    <div class="contenedor-par">
+                      <div class="grupo2">
+                        <label for="nombre">Nombre Completo*</label>
+                        <input type="text" class="input-par" name="nombre" {% if error_nombre %} class = "error" {% endif %}>
+                        {% if error_nombre %}
+                        <p class="error-message"> {{ error_nombre }} </p>
+                        {% endif %}
+                    </div>
+                    <!------------------------------------------------>
+                    <div class="grupo2">
+                        <label for="apellido">Apellido*</label>
+                        <input type="text" class="input-par" name="apellido" {% if error_apellido %} class = "error" {% endif %}>
+                        {% if error_apellido %}
+                        <p class="error-message"> {{ error_apellido }} </p>
+                        {% endif %}
+                    </div>
+                    </div>
+                
+                <!------------------------------------------------>
+                <div class="contenedor-par">
+                  <div class="grupo2">
+                    <label>Importe una Imagen (JPG)*</label>
+                    <input type="file" class="imagen {% if error_imagen %} error {% endif %}" name="imagen" accept="image/*" >
+                    {% if error_imagen %}
+                    <p class="error-message"> {{ error_imagen }} </p>
+                    {% endif %}
+                  </div>
+  
+                  <div class="grupo2">
+                    <label>Previsualización de la imagen:</label>
+                    <img id="imagen-preview" src="#" alt="Imagen previa" style="display: none; width: 100px; height: auto; border-radius: 100px;">
+                  </div>
+                </div>
+                
+                <!------------------------------------------------>
+                <div class="contenedor-par">
+                  <div class="grupo2" >
+                    <label for="edad">Edad*</label>
+                    <input type="number" class="input-par" name="edad" {% if error_edad %} class = "error" {% endif %}>
+                    {% if error_edad %}
+                    <p class="error-message"> {{ error_edad }} </p>
+                    {% endif %}
+                </div>
+                <!------------------------------------------------>
+                <div class="grupo2">
+                    <label for="nacimiento">Fecha de Nacimiento*</label>
+                    <input type="date" class="input-par" name="nacimiento" {% if error_nacimiento %} class = "error" {% endif %}>
+                    {% if error_nacimiento %}
+                    <p class="error-message"> {{ error_nacimiento }} </p>
+                    {% endif %}
+                </div>
+                </div>
+                
+                <!------------------------------------------------>
+                <div class="grupoGenero">
+                    <p>Género*
+                        <br>
+                        <br>
+                        <input type="radio" name="genero" value="1"> Masculino
+                        <br>
+                        <input type="radio" name="genero" value="2"> Femenino
+                        <br>
+                        <input type="radio" name="genero" value="3"> No binario
+                    </p>
+                    {% if error_genero %}
+                    <p class="error-message"> {{ error_genero }} </p>
+                    {% endif %}
+                </div>
+                <!------------------------------------------------>
+                <div class="grupo">
+                    <label for="correo">Correo Electrónico*</label>
+                    <input type="email" class="correo" name="correo" {% if error_correo %} class = "error" {% endif %}>
+                    {% if error_correo %}
+                    <p class="error-message"> {{ error_correo }} </p>
+                    {% endif %}
+                </div>
+                    <!------------------------------------------------>
+                <div class="grupo">
+                    <label for="confirmar_correo">Confirmar Correo Electrónico*</label>
+                    <input type="email" clase="confirmar_correo" name="confirmar_correo" {% if error_correo %} class = "error" {% endif %}>
+                    {% if error_correo %}
+                    <p class="error-message"> {{ error_correo }} </p>
+                    {% endif %}
+                </div>
+                <!------------------------------------------------>
+                <div class="contenedor-par">
+                  <div class="grupo2">
+                    <label for="calle">Calle *</label>
+                    <input type="text" name="calle" class="input-par" {% if error_calle %} error {% endif %}>
+                    {% if error_calle %}
+                    <p class="error-message"> {{ error_calle }} </p>
+                    {% endif %}
+                  </div>
+
+                  <div class="grupo2">
+                    <label for="numeracion">Nº</label>
+                    <input type="text" name="numeracion" class="input-par" {% if error_numeracion %} error {% endif %}>
+                    {% if error_numeracion %}
+                    <p class="error-message"> {{ error_numeracion }} </p>
+                    {% endif %}
+                  </div>
+                  
+                  <!------------------------------------------------>
+                  <div class="grupo2">
+                      <label for="residencia">Ciudad o Barrio*</label>
+                      <select class="residencia {% if error_residencia %} error {% endif %}"  name="residencia">
+                          <option value="" selected disabled>Selecciona tu lugar de residencia</option>
+                          <option value="Malagueño, Cordoba, Argentina">Malagueño, Cordoba, Argentina</option>
+                          <option value="Capital, Cordoba, Argentina">Capital, Cordoba, Argentina</option>
+                          <option value="Villa Carlos Paz, Cordoba, Argentina">Villa Carlos Paz, Cordoba, Argentina</option>
+                          <option value="Alta Gracia, Cordoba, Argentina">Alta Gracia, Cordoba, Argentina</option>
+                          <option value="Acuavista, Malagueño, Cordoba, Argentina">San Nicolas, Malagueño, Cordoba, Argentina</option>
+                          <option value="Causana, Malagueño, Cordoba, Argentina">Causana, Malagueño, Cordoba, Argentina</option>
+                          <option value="Docta, Malagueño, Cordoba, Argentina">Docta, Malagueño, Cordoba, Argentina</option>
+                          <option value="Estación del Carmen, Malagueño, Cordoba, Argentina">Estación del Carmen, Malagueño, Cordoba, Argentina</option>
+                          <option value="Falda del Cañete, Cordoba, Argentina">Falda del Cañete, Cordoba, Argentina</option>
+                          <option value="La Arbolada, Malagueño, Cordoba, Argentina">La Arbolada, Malagueño, Cordoba, Argentina</option>
+                          <option value="La Juanita, Malagueño, Cordoba, Argentina">La Juanita, Malagueño, Cordoba, Argentina</option>
+                          <option value="La Cañitas, Malagueño, Cordoba, Argentina">La Cañitas, Malagueño, Cordoba, Argentina</option>
+                          <option value="Primero de Mayo, Malagueño, Cordoba, Argentina">Primero de Mayo, Malagueño, Cordoba, Argentina</option>
+                          <option value="Punta del Agua, Malagueño, Cordoba, Argentina">Punta del Agua, Malagueño, Cordoba, Argentina</option>
+                          <option value="San Nicolas, Malagueño, Cordoba, Argentina">San Nicolas, Malagueño, Cordoba, Argentina</option>
+                          <option value="Sierra de Oro, Malagueño, Cordoba, Argentina">Sierra de Oro, Malagueño, Cordoba, Argentina</option>
+                          <option value="Tejas 5, Malagueño, Cordoba, Argentina">Tejas 5, Malagueño, Cordoba, Argentina</option>
+                          <option value="Tejas 3, Malagueño, Cordoba, Argentina">Tejas 3, Malagueño, Cordoba, Argentina</option>
+                          <option value="Tierra Alta, Malagueño, Cordoba, Argentina">Tierra Alta, Malagueño, Cordoba, Argentina</option>
+                          <option value="Torre Milenicas, Malagueño, Cordoba, Argentina">Torre Milenicas, Malagueño, Cordoba, Argentina</option>
+                          <option value="Valle del Golf, Malagueño, Cordoba, Argentina">Valle del Golf, Malagueño, Cordoba, Argentina</option>
+                          <option value="Veneto, Malagueño, Cordoba, Argentina">Veneto, Malagueño, Cordoba, Argentina</option>
+                          <option value="Yocsina, Malagueño, Cordoba, Argentina">Yocsina, Malagueño, Cordoba, Argentina</option>
+                          <!-- Agrega más opciones según sea necesario -->
+                          {% if error_residencia %}
+                          <p class="error-message"> {{ error_residencia }} </p>
+                          {% endif %}
+                      </select>
+                  </div>
+                </div>
+                
+                <!------------------------------------------------>
+                <div class="grupo">
+                    <label for="telefono">Teléfono*</label>
+                    <input type="tel" class="telefono" name="telefono" placeholder="Ej: 3510001111" {% if error_telefono %} class = "error" {% endif %}>
+                    {% if error_telefono %}
+                    <p class="error-message"> {{ error_telefono }} </p>
+                    {% endif %}
+                </div>
+                <!------------------------------------------------>
+
+                <div class="grupoGenero">
+                  <label>Idioma *</label>
+                  <br>
+                  <input type="radio" name="idioma" value="1"> Español
+                  <br>
+                  <input type="radio" name="idioma" value="2"> Inglés Básico
+                  <br>
+                  <input type="radio" name="idioma" value="3"> Inglés Intermedio
+                  <br>
+                  <input type="radio" name="idioma" value="4"> Inglés Avanzado 
+                  {% if error_idioma %}
+                  <p class="error-message"> {{ error_idioma }} </p>
+                  {% endif %}
+                </div>
+
+                <!------------------------------------------------>
+                <div class="grupoGenero">
+                  <label>Marque algunas habilidades con las que se sienta identificado</label>
+                  <br>
+                  <input type="checkbox" name="aptitudes[]" value="Liderazgo"> Liderazgo
+                  <br>
+                  <input type="checkbox" name="aptitudes[]" value="Trabajo en equipo"> Trabajo en equipo
+                  <br>
+                  <input type="checkbox" name="aptitudes[]" value="Gestión de proyectos"> Gestión de proyectos
+                  <br>
+                  <input type="checkbox" name="aptitudes[]" value="Gestión del tiempo"> Gestión del tiempo
+                  <br>
+                  {% if error_aptitudes %}
+                  <p class="error-message"> {{ error_aptitudes }} </p>
+                  {% endif %}
+                </div>
+
+                <br>
+                <button class="button-siguiente" type="button" onclick="mostrarSiguienteFormulario('form1', 'form2')">Siguiente</button>
+                <br>
+                
+                </div>
+            <!------------------------------------------------>
+
+
+                <!-----------------------HTML F.Academica------------------------->    
+
+                    <div class="container" id="form2" style="display: none;">
+                <!------------------------------------------------>
+                        <h2>Educación</h2>
+                        <br>
+                        <div class="separador">
+                            <hr />
+                            <span> 0 </span>
+                            <hr />
+                        </div>
+                        <br>
+                <!------------------------------------------------>
+                        <div>
+                          <h3>Completar los campos de la formación de más alto nivel alcanzado</h3>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="grupo">
+                            <label for="institucion">Institución Educativa *</label>
+                            <input type="text" class="institucion" name="institucion"  {% if error_institucion %} class = "error" {% endif %}>
+                            {% if error_institucion %}
+                            <p class="error-message"> {{ error_institucion }} </p>
+                            {% endif %}
+                        </div>
+                    <!------------------------------------------------>
+                        <div class="grupo">
+                            <label for="especialidad">Especialidad *</label>
+                            <select class="especialidad {% if error_especialidad %} error {% endif %}" name="especialidad">
+                              <option value="" selected disabled>Selecciona una Especialidad</option>
+                              <option value="Informática">Informática</option>
+                              <option value="Economía y Administración">Economía y Administración</option>
+                              <option value="Comunicación">Comunicación</option>
+                              <option value="Salud">Ciencias Sociales</option>
+                              <option value="Ciencias Sociales">Ciencias Sociales</option>
+                              <option value="Otro">Otro</option>
+                              <!-- Agrega más opciones según sea necesario -->
+                              {% if error_especialidad %}
+                              <p class="error-message"> {{ error_especialidad }} </p>
+                              {% endif %}
+                          </select>
+                        </div>
+                    <!------------------------------------------------>
+                    <div class="contenedor-par">
+                      <div class="grupo2">
+                        <label for="inicio">Inicio *</label>
+                        <input type="date" class="input-par" name="inicio" {% if error_inicio %} class = "error" {% endif %}>
+                        {% if error_inicio %}
+                        <p class="error-message"> {{ error_inicio }} </p>
+                        {% endif %}
+                    </div>
+                <!------------------------------------------------>
+                    <div class="grupo2">
+                        <label for="fin">Fin *</label>
+                        <input type="date" class="input-par" name="fin" {% if error_fin %} class = "error" {% endif %}>
+                        {% if error_fin %}
+                        <p class="error-message"> {{ error_fin }} </p>
+                        {% endif %}
+                    </div>
+                    </div>
+                        
+                    <!------------------------------------------------>
+                    <div class="grupoGenero">
+                        <p>Formación Académca *
+                            <br>
+                            <br>
+                            <input type="radio" class="grado" name="grado" value="1"> Secundario
+                            <br>
+                            <input type="radio" class="grado" name="grado" value="2"> Pre-grado
+                            <br>
+                            <input type="radio" class="grado" name="grado" value="3"> Terciario
+                            <br>
+                            <input type="radio" class="grado" name="grado" value="4"> Grado
+                            <br>
+                            <input type="radio" class="grado" name="grado" value="5"> Post-grado
+                            <br>
+                        </p>
+                        {% if error_grado %}
+                        <p class="error-message"> {{ error_grado }} </p>
+                        {% endif %}
+                    </div>
+                    <!------------------------------------------------>
+                    <br>
+                    <div>
+                      <h1> · Describa otras Institución adicional siguiendo el formato anterior: Institución, Especialidad, Inicio, Fin, Formación Académca. Sino deje el campo vacío</h1>
+                      <br>
+                    </div>
+                    <!------------------------------------------------>
+                    <div class="grupo">
+                      <label for="notasFormacion">Formación Adicional:</label>
+                      <textarea class="notasFormacion {% if error_notasFormacion %} error {% endif %}"  name="notasFormacion" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
+                      {% if error_notasFormacion %}
+                      <p class="error-message"> {{ error_notasFormacion }} </p>
+                      {% endif %}
+                    </div>
+                    <!------------------------------------------------>
+                    <div class="boton">
+
+                      <button type="button" onclick="mostrarAnteriorFormulario('form2', 'form1')">Atrás</button>
+                        <button type="button" onclick="mostrarSiguienteFormulario('form2', 'form3')">Siguiente</button>  
+
+                    </div>
+                    <!------------------------------------------------>
+                
+                    </div>
+
+            <!-----------------------HTML E.Laboral------------------------->
+            <div class="container" id="form3" style="display: none;">
+              <!------------------------------------------------>
+
+                      <h2>Experiencia Laboral</h2>
+                      <br>
+                  <div class="separador">
+                      <hr />
+                      <span> 0 </span>
+                      <hr />
+                  </div>
+                      <br>
+                      <!------------------------------------------------>
+                      <div>
+                        <h3>Completar con información de la experiencia laboral más reciente</h3>
+                      </div>
+                      <br>
+                      <br>
+                  <!------------------------------------------------>
+                      <div class="grupo">
+                          <label for="empresa">Empresa *</label>
+                          <input type="text" class="empresa" name="empresa" {% if error_empresa %} class = "error" {% endif %}>
+                          {% if error_empresa %}
+                          <p class="error-message"> {{ error_empresa }} </p>
+                          {% endif %}
+                      </div>
+                      <!------------------------------------------------>
+                      <div class="grupo">
+                        <label for="descripcion">Rol Desempeñado *</label>
+                        <input class="descripcion" name="descripcion" {% if error_descripcion %} class = "error" {% endif %}  ></input>
+                        {% if error_descripcion %}
+                        <p class="error-message"> {{ error_descripcion }} </p>
+                        {% endif %}
+                    </div>
+
+                      <!------------------------------------------------>
+                      <div class="grupo">
+                          <label for="tareas">Resumen de Tareas Desempeñadas *</label>
+                          <textarea class="tareas" name="tareas" {% if error_tareas %} class = "error" {% endif %} placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
+                          {% if error_tareas %}
+                          <p class="error-message"> {{ error_tareas }} </p>
+                          {% endif %}
+                      </div>
+                      <!------------------------------------------------>
+                      <div class="contenedor-par">
+                        <div class="grupo2">
+                          <label for="desde">Desde *</label>
+                          <input type="date" class="input-par" name="desde" {% if error_desde %} class = "error" {% endif %}>
+                          {% if error_desde %}
+                          <p class="error-message"> {{ error_desde }} </p>
+                          {% endif %}
+                      </div>
+                      <!------------------------------------------------>
+                      <div class="grupo2">
+                              <label for="hasta">Hasta *</label>
+                              <input type="date" class="input-par" name="hasta"  {% if error_hasta %} class = "error" {% endif %}>
+                              {% if error_hasta %}
+                              <p class="error-message"> {{ error_hasta }} </p>
+                              {% endif %}
+                      </div>
+                      </div>
+                      
+                      <!------------------------------------------------>
+                      <br>
+                      <div>
+                        <h1> · Describa otras experiencias adicionales siguiendo el formato anterior: Empresa, Rol Desempeñado, Resumen de Tareas, Desde, Hasta. Sino deje el campo vacío</h1>
+                        <br>
+                      </div>
+                    <!------------------------------------------------>
+
+                      <div class="grupo">
+                        <label for="notasExperiencia">Experiencia Adicional:</label>
+                        <textarea class="notasExperiencia {% if error_notasExperiencia %} error {% endif %}" name="notasExperiencia" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
+                        {% if error_notasExperiencia %}
+                        <p class="error-message"> {{ error_notasExperiencia }} </p>
+                        {% endif %}
+                      </div>
+                      <!------------------------------------------------>
+                      <br>
+                      <button type="button" onclick="mostrarAnteriorFormulario('form3', 'form2')">Atrás</button> 
+                      <input class="button-confirmar" type="submit" value="Confirmar">
+                      <br>
+                </div>
+          </div>
+
+      </form>
+    </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="main-menu2">
+          <div class="friends-activity">
+            <h1>Novedades</h1>
+            <div class="card-container">
+            
+            
+              <div class="card">
+             
+              <div class="card-user-info">
+                <img src="../static/IMG/Logo_Iso_Municipalidad_ PNG.png"" />
+                <h2>Municipales</h2>
+                <div class="button_ir">
+                  <button class="buttons"><a href="https://www.malagueno.gob.ar/"> Ver Mas...</a></button>
+                </div>
+              </div>
+              <img class="card-img" src="../static/IMG/APP.png" alt="" />
+              <p class="titulo"><strong>Lanzamientos Digitales</strong><br></p></div> 
+
+
+              <div class="card">
+            
+                <div class="card-user-info">
+                  <img src="https://www.hause-mobel.com.ar/wp-content/uploads/2022/06/hausemobel.jpg" alt="" />
+                  <h2>Hause Mobel</h2>
+                  <div class="button_ir">
+                    <button class="buttons"><a href="https://ar.linkedin.com/company/hause-m%C3%B6bel"> Ver Mas...</a></button>
+                  </div>
+                </div>
+                <img class="card-img" src="../static/IMG/unrecognizable-woman-sitting-desk-office-typing-keyboard.jpg" alt="" />
+                <p class="titulo"><strong>Oportunidad Laboral</strong><br></p></div> 
+
+              </div>
+
+                  <div class="card">
+                  
+                    <div class="card-user-info">
+                      <img src="../static/IMG/IMAGEN LOGO.png" alt="" />
+                      <h2>Holcim S.A</h2>
+                      <div class="button_ir">
+                        <button class="buttons"><a href="https://careers.holcimgroup.com/holcim_argentina/go/Empleos-en-Holcim-Argentina/8822102/"> Ver Mas...</a></button>
+                      </div>
+                    </div>
+                    <img class="card-img" src="../static/IMG/videoframe_0.png" alt="" />
+                    <p><strong>Oportunidades Laborales</strong><br></p>
+                  </div> 
+                  <br>
+                  </div></div>
+                  
+      </section>
+    </main>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+$(document).ready(function() {
+        $('.imagen').change(function() {
+            var input = $(this)[0];
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagen-preview').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    });
+
+
+
+//----------------Funcion de mostrar formulario especifico----------------
+
+let currentFormId = null;
+
+function mostrarFormulario(formId) {
+    // Oculta todos los formularios
+    const formularios = document.querySelectorAll('.container');
+    formularios.forEach(formulario => {
+        formulario.style.display = 'none';
+    });
+    // Muestra el formulario seleccionado
+    document.getElementById(formId).style.display = 'block';
+    currentFormId = formId;
+    // Actualiza la clase activa del ícono correspondiente
+    actualizarClaseActiva(formId);
+}
+
+function mostrarElemento(id) {
+    var elemento = document.getElementById(id);
+    elemento.style.display = "block";
+  }
+
+
+//----------------Funcion de mostrar formulario Siguiente----------------
+
+function mostrarSiguienteFormulario(formActual, formSiguiente) {
+    document.getElementById(formActual).style.display = 'none';
+    document.getElementById(formSiguiente).style.display = 'block';
+    document.querySelector(`[data-form="${formSiguiente}"]`).classList.add('active');
+    document.querySelector(`[data-form="${formActual}"]`).classList.remove('active');
+    window.scrollTo(0, 0); // Añade esta línea para desplazar la página al comienzo
+}
+
+
+//----------------Funcion de mostrar formulario Anterior----------------
+
+function mostrarAnteriorFormulario(formActual, formAnterior) {
+    document.getElementById(formActual).style.display = 'none';
+    document.getElementById(formAnterior).style.display = 'block';
+    document.querySelector(`[data-form="${formAnterior}"]`).classList.add('active');
+    document.querySelector(`[data-form="${formActual}"]`).classList.remove('active');
+    window.scrollTo(0, 0);
+}
+
+//----------------Funcion de Iconos----------------
+
+const navItems = document.querySelectorAll(".nav-item");
+
+navItems.forEach((navItem, i) => {
+  navItem.addEventListener("click", () => {
+    navItems.forEach((item, j) => {
+      item.className = "nav-item";
+    });
+    navItem.className = "nav-item active";
+  });
+});
+
+
+//---------------Funcion de Mensaje------------------------
+
+    setTimeout(function(){
+            elementoP = document.querySelector('.msg');
+            elementoP.style.display = 'none';
+        }, 3000);
+
+    </script>
+
+  </body>
