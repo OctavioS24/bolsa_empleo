@@ -69,6 +69,7 @@ input {
     margin: 40px;
     box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
     font-size: 20px;
+    border: none;
 }
 
 input:hover {
