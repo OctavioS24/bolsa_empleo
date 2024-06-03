@@ -5,7 +5,7 @@
   <link rel="icon" href="../static/IMG/Logo_Iso color.png">
   <meta charset="UTF-8">
   <title>Empleo Malagueño</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'><link rel="stylesheet" href="../static/styles.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'><link rel="stylesheet" href="../static/styles.css" >
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     .msg{
@@ -288,7 +288,7 @@
                         <br>
                 <!------------------------------------------------>
                         <div>
-                          <h3>Completar los campos de la formación de más alto nivel alcanzado</h3>
+                          <p class="texto">Completar los campos de la formación de más alto nivel alcanzado</p>
                         </div>
                         <br>
                         <br>
@@ -358,7 +358,7 @@
                     <!------------------------------------------------>
                     <br>
                     <div>
-                      <h1> · Describa otras Institución adicional siguiendo el formato anterior: Institución, Especialidad, Inicio, Fin, Formación Académca. Sino deje el campo vacío</h1>
+                      <p class="texto"> · Describa otras Institución adicional siguiendo el formato anterior: Institución, Especialidad, Inicio, Fin, Formación Académca. Sino deje el campo vacío</p>
                       <br>
                     </div>
                     <!------------------------------------------------>
@@ -394,7 +394,7 @@
                       <br>
                       <!------------------------------------------------>
                       <div>
-                        <h3>Completar con información de la experiencia laboral más reciente</h3>
+                        <p class="texto">Completar con información de la experiencia laboral más reciente</p>
                       </div>
                       <br>
                       <br>
@@ -445,7 +445,8 @@
                       <!------------------------------------------------>
                       <br>
                       <div>
-                        <h1> · Describa otras experiencias adicionales siguiendo el formato anterior: Empresa, Rol Desempeñado, Resumen de Tareas, Desde, Hasta. Sino deje el campo vacío</h1>
+                        <p class="texto"> · Describa otras experiencias adicionales siguiendo el formato anterior: Empresa, Rol Desempeñado, Resumen de Tareas, Desde, Hasta. Sino deje el campo vacío</h1>
+                        <br>
                         <br>
                       </div>
                     <!------------------------------------------------>
@@ -541,20 +542,27 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
-$(document).ready(function() {
-        $('.imagen').change(function() {
-            var input = $(this)[0];
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#imagen-preview').attr('src', e.target.result).show();
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-    });
-
-
+      $(document).ready(function() {
+          $('.imagen').change(function() {
+              var input = $(this)[0];
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  var file = input.files[0];
+                  var fileType = file.type.toLowerCase();
+                  if (fileType === "image/jpeg" || fileType === "image/jpg") {
+                      reader.onload = function(e) {
+                          $('#imagen-preview').attr('src', e.target.result).show();
+                      }
+                      reader.readAsDataURL(file);
+                  } else {
+                      alert("Por favor, seleccione un archivo de imagen JPG.");
+                      // Limpia el campo de entrada
+                      $(this).val('');
+                      // Puedes ocultar o limpiar la vista previa de la imagen aquí
+                  }
+              }
+          });
+      });
 
 //----------------Funcion de mostrar formulario especifico----------------
 
