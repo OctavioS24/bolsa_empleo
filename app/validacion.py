@@ -34,6 +34,7 @@ def validacionImagen(imagen):
     extension = imagen.filename.rsplit('.', 1)[1].lower()
     if extension != 'jpg':
         return False
+    
     return True
 
 
@@ -90,12 +91,11 @@ def validacionCalle(calle):
     return True
 
 def validacionNumeracion(numeracion):
-    
-    try:
-        float(numeracion)  # Intenta convertir el dato a un número de punto flotante
+    if numeracion.isdigit():  # Verifica si todos los caracteres son dígitos
         return True
-    except ValueError:
+    else:
         return False
+
 
 def validar_residencia(residencia):
     if residencia is None or residencia == "":

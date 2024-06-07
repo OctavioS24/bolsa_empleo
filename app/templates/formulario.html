@@ -116,7 +116,7 @@
   
                   <div class="grupo2">
                     <label>Previsualización de la imagen:</label>
-                    <img id="imagen-preview" src="#" alt="Imagen previa" style="display: none; width: 100px; height: auto; border-radius: 100px;">
+                    <img id="imagen-preview" src="#" alt="Imagen previa" style="display: none; width: 100px; height: auto; border-radius: 100px; ">
                   </div>
                 </div>
                 
@@ -307,7 +307,7 @@
                               <option value="Informática">Informática</option>
                               <option value="Economía y Administración">Economía y Administración</option>
                               <option value="Comunicación">Comunicación</option>
-                              <option value="Salud">Ciencias Sociales</option>
+                              <option value="Salud">Salud</option>
                               <option value="Ciencias Sociales">Ciencias Sociales</option>
                               <option value="Otro">Otro</option>
                               <!-- Agrega más opciones según sea necesario -->
@@ -445,7 +445,7 @@
                       <!------------------------------------------------>
                       <br>
                       <div>
-                        <p class="texto"> · Describa otras experiencias adicionales siguiendo el formato anterior: Empresa, Rol Desempeñado, Resumen de Tareas, Desde, Hasta. Sino deje el campo vacío</h1>
+                        <p class="texto"> · Describa otras experiencias adicionales siguiendo el formato anterior: Empresa, Rol Desempeñado, Resumen de Tareas, Desde, Hasta. Sino deje el campo vacío</p>
                         <br>
                         <br>
                       </div>
@@ -546,23 +546,33 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
+      //--------------------Funcion Imagen---------------------------
+
       $(document).ready(function() {
           $('.imagen').change(function() {
               var input = $(this)[0];
+              var maxSizeMB = 5;  // Define el tamaño máximo permitido en megabytes
+              var maxSizeBytes = maxSizeMB * 1000 * 1000;  // Convertir megabytes a bytes
+
               if (input.files && input.files[0]) {
-                  var reader = new FileReader();
                   var file = input.files[0];
+                  var fileSize = file.size;  // Tamaño del archivo en bytes
                   var fileType = file.type.toLowerCase();
-                  if (fileType === "image/jpeg" || fileType === "image/jpg") {
+
+                  if (fileSize > maxSizeBytes) {
+                      alert("El archivo es demasiado grande. El tamaño máximo permitido es " + maxSizeMB + " MB.");
+                      $(this).val('');  // Limpiar el campo de entrada
+                      $('#imagen-preview').hide();  // Ocultar o limpiar la vista previa de la imagen
+                  } else if (fileType === "image/jpeg" || fileType === "image/jpg") {
+                      var reader = new FileReader();
                       reader.onload = function(e) {
                           $('#imagen-preview').attr('src', e.target.result).show();
                       }
                       reader.readAsDataURL(file);
                   } else {
                       alert("Por favor, seleccione un archivo de imagen JPG.");
-                      // Limpia el campo de entrada
-                      $(this).val('');
-                      // Puedes ocultar o limpiar la vista previa de la imagen aquí
+                      $(this).val('');  // Limpiar el campo de entrada
+                      $('#imagen-preview').hide();  // Ocultar o limpiar la vista previa de la imagen
                   }
               }
           });

@@ -191,48 +191,7 @@ body {
     width: 90%;
   }
   
-  /*----------------------------------------------------------*/
-  
-  @media only screen and (max-width: 1150px) {
-    h2 {
-        font-size: 24px;
-    }
-  
-    input, select, textarea {
-        width: 90%;
-        font-size: 14px;
-    }
-  
-    form {
-        padding: 20px;
-    }
-  
-    label, p {
-        font-size: 14px;
-    }
-  
-    button, .button-confirmar {
-        width: 100%;
-    }
-  
-    .separador {
-        display: none;
-    }
-  
-    .contenedor-par {
-        flex-direction: column;
-    }
-  
-    .grupo2 {
-        margin-right: 0;
-    }
-  
-    #imagen-preview {
-        width: 100px;
-        height: 100px;
-        border-radius: 50px;
-    }
-  }
+
   
   /*----------------------------------------------------------*/
   
@@ -349,3 +308,48 @@ body {
     color: #338c36;
     font-size: 15px;
   }
+
+    /*----------------------------------------------------------*/
+
+    @media only screen and (max-width: 1150px) {
+      h2 {
+          font-size: 24px;
+      }
+    
+      input, select, textarea {
+          width: 90%;
+          font-size: 14px;
+      }
+    
+      form {
+          padding: 20px;
+      }
+    
+      label, p {
+          font-size: 14px;
+      }
+    
+      button, .button-confirmar {
+          width: 100%;
+      }
+    
+      .separador {
+          display: none;
+      }
+    
+      .contenedor-par {
+          flex-direction: column;
+      }
+    
+      .grupo2 {
+          margin-right: 0;
+      }
+    
+      #imagen-preview {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+      }
+    }
+
+    

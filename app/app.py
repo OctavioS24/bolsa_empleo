@@ -326,7 +326,7 @@ def descargar_pdf():
 
 
 # Ruta donde se guardará el archivo PDF en la carpeta "static"
-    ruta_pdf = os.path.join(app.root_path, 'static/pdfs', 'usuarios.pdf')
+    ruta_pdf = os.path.join(app.root_path, 'static/pdfs', f"{nombre_persona}.pdf")
 
     # Guarda el PDF en la carpeta "static"
     with open(ruta_pdf, 'wb') as archivo_pdf:

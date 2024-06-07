@@ -665,6 +665,7 @@ main {
   background: #28772b;
 }
 
+
 @media (max-width: 1500px) {
   main {
     grid-template-columns: 6% 94%;
@@ -688,7 +689,7 @@ main {
     grid-template-columns: 70% 30%;
   }
 }
-/*
+
 @media (max-width: 1380px) {
   main {
     grid-template-columns: 8% 92%;
@@ -716,7 +717,7 @@ main {
   }
 
 }
-*/
+
 @media (max-width: 1150px) {
   .content {
     grid-template-columns: 60% 40%;
@@ -821,7 +822,7 @@ main {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   body {
     padding-top: 60px; /* Espacio para la barra de navegación fija */
   }
@@ -843,6 +844,10 @@ main {
 
   p .texto {
     font-size: 1.0rem; /* Ajuste del tamaño de los h1 para móvil */
+  }
+
+  label {
+    font-size: 1.0rem;
   }
 
   .content {
