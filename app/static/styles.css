@@ -822,10 +822,18 @@ main {
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body {
-    padding-top: 60px; /* Espacio para la barra de navegación fija */
+    background-image: none;
+    margin: 0;
+    display: block;
   }
+
+  .msg {
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 100%;
+}
 
   nav ul {
     flex-direction: column;
@@ -838,8 +846,9 @@ main {
   }
 
   main {
-    grid-template-columns: 15% 85%;
-    margin: 10px;
+    grid-template-columns: 15% 85%; /* Ajuste del ancho de las columnas */
+    margin: 5px; /* Reducción del margen para aumentar el ancho total */
+    width: 100%; /* Asegurar que ocupe el 100% del viewport */
   }
 
   p .texto {
@@ -905,6 +914,99 @@ main {
   }
 
   .card-img{
+    max-width: 80%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 420px) {
+  body {
+    background-image: none;
+    margin: 0;
+    display: block;
+  }
+
+  .msg {
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 100%;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  main {
+    display: block;
+    margin: 5px;
+    width: 100%;
+  }
+
+  p .texto {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  .content {
+    display: block;
+  }
+
+  .left-content {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .right-content {
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .activities .activity-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .left-bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .active-calories-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .friends-activity {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  .card {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 1px 2px 6px;
+  }
+
+  .main-menu2 {
+    background-color: #F6F7FB;
+  }
+
+  .main-menu2 h1 {
+    color: #338c36;
+  }
+
+  .card-img {
     max-width: 80%; 
     height: auto; 
     display: block; 
