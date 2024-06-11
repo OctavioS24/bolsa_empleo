@@ -36,7 +36,17 @@
         <h1>Portal de Empleo</h1>
         <img class="logo" src="../static/IMG/iso blanco y.png" alt="" />
         <ul>
-          <li class="nav-item active" data-form="form1" onclick="mostrarFormulario('form1')">
+
+          <li class="nav-item active" data-form="consulata-categoria" onclick=" mostrarFormulario('consulata-categoria')">
+            <b></b>
+            <b></b>
+            <a href="#">
+              <i class="fa fa-briefcase nav-icon"></i>
+              <span class="nav-text">Categoria</span>
+            </a>
+          </li>
+
+          <li class="nav-item" data-form="form1" onclick="mostrarFormulario('form1')">
             <b></b>
             <b></b>
             <a href="#">
@@ -78,7 +88,51 @@
 
         <!------------------------------------------------>
     <form action = "{{ url_for('registrarForm')}}" method="POST"  onsubmit="return mostrarMensajeConfirmacion()" enctype="multipart/form-data">
-                <div class="container" id="form1">
+
+      <div class="container" id="consulata-categoria" >
+        <h2>Preferencia</h2>
+        <br>
+        <div class="separador">
+          <hr />
+          <span> 0 </span>
+          <hr />
+        </div>
+        <br>
+        <div>
+          <p class="texto">Mi búsqueda laboral está orientada a cubrir puestos en las áreas de... </p>
+        </div>
+        <br>
+        <div class="grupo">
+          <label for="preferencia">Preferencia Laboral *</label>
+          <select class=" {% if error_preferencia %} error {% endif %}" name="preferencia">
+            <option value="" selected disabled>Selecciona una Preferencia Laboral</option>
+            <option value="Administración">Administración</option>
+            <option value="Atención al Cliente">Atención al Cliente</option>
+            <option value="Contrucción y Obras">Contrucción y Obras</option>
+            <option value="Contabilidad, Finanzas">Contabilidad / Finanzas</option>
+            <option value="Diseño, Artes Gráficas">Diseño / Artes Gráficas</option>
+            <option value="Salud">Salud</option>
+            <option value="Hostelería, Turismo">Hostelería / Turismo</option>
+            <option value="Informática, Telecomunicaciones">Informática / Telecomunicaciones</option>
+            <option value="Mantenimiento y Repaparación Técnica">Mantenimiento y Repaparación Técnica</option>
+            <option value="Operario, Empleado">Operario / Empleado</option>
+            <!-- Agrega más opciones según sea necesario -->
+            
+        </select>
+        {% if error_preferencia %}
+        <p class="error-message"> {{ error_preferencia }} </p>
+        {% endif %}
+      </div>
+      <div class="boton">
+
+          <button type="button" onclick="mostrarSiguienteFormulario('consulata-categoria', 'form1')">Siguiente</button>  
+
+      </div>
+        </div>
+
+
+
+                <div class="container" id="form1" style="display: none;">
                     <h2>Datos Personales</h2>
                     <br>
                     <div class="separador">
@@ -218,10 +272,10 @@
                           <option value="Veneto, Malagueño, Cordoba, Argentina">Veneto, Malagueño, Cordoba, Argentina</option>
                           <option value="Yocsina, Malagueño, Cordoba, Argentina">Yocsina, Malagueño, Cordoba, Argentina</option>
                           <!-- Agrega más opciones según sea necesario -->
-                          {% if error_residencia %}
-                          <p class="error-message"> {{ error_residencia }} </p>
-                          {% endif %}
                       </select>
+                      {% if error_residencia %}
+                      <p class="error-message"> {{ error_residencia }} </p>
+                      {% endif %}
                   </div>
                 </div>
                 
@@ -268,6 +322,7 @@
                 </div>
 
                 <br>
+                <button type="button" onclick="mostrarAnteriorFormulario('form1', 'consulata-categoria')">Atrás</button>
                 <button class="button-siguiente" type="button" onclick="mostrarSiguienteFormulario('form1', 'form2')">Siguiente</button>
                 <br>
                 
@@ -312,10 +367,10 @@
                               <option value="Ciencias Sociales">Ciencias Sociales</option>
                               <option value="Otro">Otro</option>
                               <!-- Agrega más opciones según sea necesario -->
-                              {% if error_especialidad %}
-                              <p class="error-message"> {{ error_especialidad }} </p>
-                              {% endif %}
                           </select>
+                          {% if error_especialidad %}
+                          <p class="error-message"> {{ error_especialidad }} </p>
+                          {% endif %}
                         </div>
                     <!------------------------------------------------>
                     <div class="contenedor-par">
@@ -467,6 +522,11 @@
                 </div>
           </div>
 
+
+          <!------------------------Formulario 4---------------------------------------->
+
+          
+          </div>
       </form>
     </div>
             </div>

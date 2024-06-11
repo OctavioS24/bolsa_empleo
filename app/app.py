@@ -27,6 +27,10 @@ def registrarForm():
     if request.method == 'POST':
         msg = ''
 
+        #--------------------Preferencia------------------------
+
+        preferencia = request.form.get('preferencia')
+
         #--------------------Datos Personales------------------------
 
         nombre = request.form['nombre']
@@ -66,6 +70,12 @@ def registrarForm():
 
         #--------------------------------------------
         aptitudes = ', '.join(aptitudes_seleccionadas)
+
+#--------------------Validacion de Preferencia------------------------
+
+        if not validar_preferencia(preferencia):
+            error_preferencia = "Debe seleccionar uno"
+            return render_template('formulario.html', error_preferencia = error_preferencia, msg='¡Falta completar campos o datos no validos!')
 
 #--------------------Validacion de D.Personales------------------------
 
@@ -186,6 +196,12 @@ def registrarForm():
 
         conexion_MySQLdb = coneccionBD()
         cursor           = conexion_MySQLdb.cursor(dictionary=True)
+
+        #--------------------Insert de D.Personales------------------------
+
+        sql_Datos_Preferencias = "INSERT INTO datos_preferencia (preferencia) VALUES (%s)"
+        valores_Datos_Preferencias = (preferencia,)
+        cursor.execute(sql_Datos_Preferencias, valores_Datos_Preferencias)
 
         #--------------------Insert de D.Personales------------------------
 

@@ -2,6 +2,14 @@ import re
 from datetime import datetime
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 
+
+
+def validar_preferencia(preferencia):
+    if preferencia is None or preferencia == "":
+        return False
+    return True
+
+
 #------------Validacion D.Personales---------------
 
 def validacionNombre(nombre):
