@@ -328,7 +328,7 @@ body {
       }
     
       label, p, .texto {
-          font-size: 14px;
+          font-size: 1.0rem;
       }
     
       button, .button-confirmar {
@@ -393,7 +393,7 @@ body {
       }
     
       label, p {
-          font-size: 12px;
+          font-size: 1.0rem;
       }
     
       input, select, textarea {

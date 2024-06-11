@@ -430,7 +430,7 @@ main {
 
 .button_ir {
   font-family: ubuntu;
-  margin-left: auto;
+  margin-left: auto; 
 }
 
 .buttons a {
@@ -438,17 +438,16 @@ main {
   font-weight: bold;
   text-decoration: none;
   color: white;
-  
- 
 }
+
 .buttons {
   font-size: 13px;
   padding: 5px;
+  margin: 0;
   font-family: ubuntu;
   border-radius: 3px;
   margin-top: 0;
 }
-
 
 .friends-activity {
   grid-area: friendsActivity;
