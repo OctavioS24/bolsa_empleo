@@ -10,7 +10,7 @@ from confiDB import coneccionBD
 
 
 app = Flask(__name__)
-
+#app.secret_key = 'tu_clave_secreta_aqui'
 
 
 @app.route('/')
@@ -67,7 +67,7 @@ def registrarForm():
         hasta = request.form['hasta']
         notasExperiencia = request.form['notasExperiencia']
 
-
+        user_id = None
         #--------------------------------------------
         aptitudes = ', '.join(aptitudes_seleccionadas)
 
@@ -202,6 +202,7 @@ def registrarForm():
         sql_Datos_Preferencias = "INSERT INTO datos_preferencia (preferencia) VALUES (%s)"
         valores_Datos_Preferencias = (preferencia,)
         cursor.execute(sql_Datos_Preferencias, valores_Datos_Preferencias)
+ 
 
         #--------------------Insert de D.Personales------------------------
 
@@ -232,7 +233,7 @@ def registrarForm():
         sql_curriculums = "INSERT INTO curriculums(nombre, apellido, curriculo) VALUES (%s, %s, %s)"
         valores_curriculum = (nombre, apellido, ruta_cv)
         cursor.execute(sql_curriculums, valores_curriculum)
-        
+        user_id = cursor.lastrowid
 
         conexion_MySQLdb.commit()
 
@@ -304,6 +305,7 @@ def descargar_pdf():
     # Consulta para obtener la fila más reciente de datos_personales
     cursor.execute("SELECT * FROM datos_personales ORDER BY id DESC LIMIT 1")
     datos_personales = cursor.fetchone()
+    #"SELECT * FROM datos_personales WHERE id = %s ORDER BY id DESC LIMIT 1", (user_id,)
 
     # Convertir la imagen de datos binarios a base64
     imagen_blob = datos_personales['imagen']
@@ -315,11 +317,12 @@ def descargar_pdf():
     # Consulta para obtener la fila más reciente de formacion_academica
     cursor.execute("SELECT * FROM formacion_academica ORDER BY id DESC LIMIT 1")
     formacion_academica = cursor.fetchone()
-
+    #"SELECT * FROM formacion_academica WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id,)
 
     # Consulta para obtener la fila más reciente de experiencia_laboral
     cursor.execute("SELECT * FROM experiencia_laboral ORDER BY id DESC LIMIT 1")
     experiencia_laboral = cursor.fetchone()
+    #"SELECT * FROM experiencia_laboral WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id,)
 
     notasFormacion_vacias = verificar_notas_formacion_vacias()
     notasExperiencia_vacias = verificar_notas_experiencia_vacias()
