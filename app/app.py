@@ -10,7 +10,7 @@ from confiDB import coneccionBD
 
 
 app = Flask(__name__)
-#app.secret_key = 'tu_clave_secreta_aqui'
+
 
 
 @app.route('/')
@@ -67,7 +67,6 @@ def registrarForm():
         hasta = request.form['hasta']
         notasExperiencia = request.form['notasExperiencia']
 
-        user_id = None
         #--------------------------------------------
         aptitudes = ', '.join(aptitudes_seleccionadas)
 
@@ -225,15 +224,23 @@ def registrarForm():
 
         #--------------------Insert de curriculums------------------------
         
+        # Recuperar los IDs generados automáticamente
+        id_datos_personales = cursor.lastrowid  # ID de datos_personales
+        id_datos_formacion = cursor.lastrowid  # ID de formacion_academica
+        id_datos_experiencia = cursor.lastrowid  # ID de experiencia_laboral
+
+        print("ID de datos_personales:", id_datos_personales)
+        print("ID de formacion_academica:", id_datos_formacion)
+        print("ID de experiencia_laboral:", id_datos_experiencia)
         
+
         current_working_directory = os.getcwd()
         ruta_cv = current_working_directory + f"/static/pdfs/{nombre}_{apellido}"
         print(ruta_cv)
 
-        sql_curriculums = "INSERT INTO curriculums(nombre, apellido, curriculo) VALUES (%s, %s, %s)"
-        valores_curriculum = (nombre, apellido, ruta_cv)
+        sql_curriculums = "INSERT INTO curriculums(nombre, apellido, curriculo, id_datos_personales, id_datos_formacion, id_datos_experiencia) VALUES (%s, %s, %s,%s, %s, %s)"
+        valores_curriculum = (nombre, apellido, ruta_cv, id_datos_personales, id_datos_formacion, id_datos_experiencia)
         cursor.execute(sql_curriculums, valores_curriculum)
-        user_id = cursor.lastrowid
 
         conexion_MySQLdb.commit()
 
@@ -305,7 +312,7 @@ def descargar_pdf():
     # Consulta para obtener la fila más reciente de datos_personales
     cursor.execute("SELECT * FROM datos_personales ORDER BY id DESC LIMIT 1")
     datos_personales = cursor.fetchone()
-    #"SELECT * FROM datos_personales WHERE id = %s ORDER BY id DESC LIMIT 1", (user_id,)
+    #"SELECT * FROM datos_personales WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_personales,)
 
     # Convertir la imagen de datos binarios a base64
     imagen_blob = datos_personales['imagen']
