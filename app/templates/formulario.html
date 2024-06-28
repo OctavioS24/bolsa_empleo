@@ -220,7 +220,7 @@
                     <!------------------------------------------------>
                 <div class="grupo">
                     <label for="confirmar_correo">Confirmar Correo Electrónico*</label>
-                    <input type="email" clase="confirmar_correo" name="confirmar_correo" {% if error_correo %} class = "error" {% endif %}>
+                    <input type="email" clase="confirmar_correo" name="confirmar_correo" {% if error_correo %} class = "error" {% endif %} onpaste="return false;">
                     {% if error_correo %}
                     <p class="error-message"> {{ error_correo }} </p>
                     {% endif %}

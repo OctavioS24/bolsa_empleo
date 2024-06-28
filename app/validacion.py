@@ -52,7 +52,7 @@ def validar_edad(edad):
     
     try:
         edad = int(edad)
-        if 18 <= edad <= 120:
+        if 18 <= edad <= 60:
             return True
         else:
             return False
@@ -67,7 +67,7 @@ def validar_nacimiento(fecha_str):
         # Intenta convertir la cadena de fecha al formato especificado
         fecha = datetime.strptime(fecha_str, '%Y-%m-%d')
         # Verifica si la fecha es válida
-        if fecha.year < 1920 or fecha.date() > datetime.now().date():
+        if fecha.year < 1964 or fecha.date() > datetime.now().date():
             return False
         return True
     except ValueError:
@@ -120,7 +120,6 @@ def validar_telefono(telefono):
         return True
     else:
         return False
-    
 
 
 def validar_idioma(idioma):

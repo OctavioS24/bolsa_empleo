@@ -24,6 +24,11 @@ def formulario():
 
 @app.route('/from', methods = ['GET', 'POST'])
 def registrarForm():
+
+    global id_datos_personales_global # Accede a la variable global
+    global id_datos_formacion_global
+    global id_datos_experiencia_global
+
     if request.method == 'POST':
         msg = ''
 
@@ -201,7 +206,7 @@ def registrarForm():
         sql_Datos_Preferencias = "INSERT INTO datos_preferencia (preferencia) VALUES (%s)"
         valores_Datos_Preferencias = (preferencia,)
         cursor.execute(sql_Datos_Preferencias, valores_Datos_Preferencias)
- 
+        id_datos_preferencia = cursor.lastrowid # ID de datos_preferencia
 
         #--------------------Insert de D.Personales------------------------
 
@@ -209,6 +214,8 @@ def registrarForm():
         valores_Datos_Personales = (nombre, apellido, imagen_binario, edad, nacimiento, genero, confirmar_correo, domicilio, residencia, telefono, idioma, aptitudes)
         cursor.execute(sql_Datos_Personales, valores_Datos_Personales)
 
+        id_datos_personales = cursor.lastrowid  # ID de datos_personales
+        id_datos_personales_global = id_datos_personales # Guardar en la variable global
 
         #--------------------Insert de F.Academica------------------------
 
@@ -216,30 +223,33 @@ def registrarForm():
         valores_Formacion_Academica = (institucion, especialidad, inicio, fin, grado, notasFormacion)
         cursor.execute(sql_Formacion_Academica, valores_Formacion_Academica)
 
+        id_datos_formacion = cursor.lastrowid  # ID de formacion_academica
+        id_datos_formacion_global = id_datos_formacion
+
         #--------------------Insert de E.Personal-------------------------
 
         sql_Experiencia_Laboral = "INSERT INTO experiencia_laboral (descripcion, empresa, tareas, desde, hasta, notasExperiencia) VALUES (%s, %s, %s, %s, %s, %s)"
         valores_Experiencia_Laboral = (descripcion, empresa, tareas, desde, hasta, notasExperiencia)
         cursor.execute(sql_Experiencia_Laboral, valores_Experiencia_Laboral)
 
+        id_datos_experiencia = cursor.lastrowid  # ID de experiencia_laboral
+        id_datos_experiencia_global = id_datos_experiencia
+
         #--------------------Insert de curriculums------------------------
         
-        # Recuperar los IDs generados automáticamente
-        id_datos_personales = cursor.lastrowid  # ID de datos_personales
-        id_datos_formacion = cursor.lastrowid  # ID de formacion_academica
-        id_datos_experiencia = cursor.lastrowid  # ID de experiencia_laboral
 
         print("ID de datos_personales:", id_datos_personales)
         print("ID de formacion_academica:", id_datos_formacion)
         print("ID de experiencia_laboral:", id_datos_experiencia)
+        print("ID de datos_preferencia:", id_datos_preferencia)
         
 
         current_working_directory = os.getcwd()
         ruta_cv = current_working_directory + f"/static/pdfs/{nombre}_{apellido}"
         print(ruta_cv)
 
-        sql_curriculums = "INSERT INTO curriculums(nombre, apellido, curriculo, id_datos_personales, id_datos_formacion, id_datos_experiencia) VALUES (%s, %s, %s,%s, %s, %s)"
-        valores_curriculum = (nombre, apellido, ruta_cv, id_datos_personales, id_datos_formacion, id_datos_experiencia)
+        sql_curriculums = "INSERT INTO curriculums(nombre, apellido, curriculo, id_datos_personales, id_datos_formacion, id_datos_experiencia, id_datos_preferencia) VALUES (%s, %s, %s,%s, %s, %s, %s)"
+        valores_curriculum = (nombre, apellido, ruta_cv, id_datos_personales, id_datos_formacion, id_datos_experiencia, id_datos_preferencia)
         cursor.execute(sql_curriculums, valores_curriculum)
 
         conexion_MySQLdb.commit()
@@ -254,11 +264,12 @@ def registrarForm():
 
 
 def verificar_notas_formacion_vacias():
+    global id_datos_formacion_global
     try:
         conexion_MySQLdb = coneccionBD()
         cursor = conexion_MySQLdb.cursor()
         
-        cursor.execute("SELECT notasFormacion FROM formacion_academica ORDER BY id DESC LIMIT 1")  # Selecciona solo la columna notasFormacion
+        cursor.execute("SELECT notasFormacion FROM formacion_academica WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_formacion_global,))
         resultadoFormacion = cursor.fetchone()  # fetchone porque solo esperamos un resultado
         print("Resultado de la consulta:", resultadoFormacion)
         cursor.close()
@@ -273,11 +284,12 @@ def verificar_notas_formacion_vacias():
         return False
 
 def verificar_notas_experiencia_vacias():
+    global id_datos_experiencia_global
     try:
         conexion_MySQLdb = coneccionBD()
         cursor = conexion_MySQLdb.cursor()
         
-        cursor.execute("SELECT notasExperiencia FROM experiencia_laboral ORDER BY id DESC LIMIT 1")  # Selecciona solo la columna notasFormacion
+        cursor.execute("SELECT notasExperiencia FROM experiencia_laboral WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_experiencia_global,))
         resultadoExperiencia = cursor.fetchone()  # fetchone porque solo esperamos un resultado
         print("Resultado de la consulta:", resultadoExperiencia)
         cursor.close()
@@ -297,6 +309,11 @@ def verificar_notas_experiencia_vacias():
 
 @app.route('/descargar_pdf', methods = ['GET', 'POST'])
 def descargar_pdf():
+
+    global id_datos_personales_global
+    global id_datos_formacion_global
+    global id_datos_experiencia_global 
+
     config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
 
     # Convertir la imagen del logo a base64
@@ -310,9 +327,8 @@ def descargar_pdf():
     cursor           = conexion_MySQLdb.cursor(dictionary=True)
 
     # Consulta para obtener la fila más reciente de datos_personales
-    cursor.execute("SELECT * FROM datos_personales ORDER BY id DESC LIMIT 1")
+    cursor.execute("SELECT * FROM datos_personales WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_personales_global,))
     datos_personales = cursor.fetchone()
-    #"SELECT * FROM datos_personales WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_personales,)
 
     # Convertir la imagen de datos binarios a base64
     imagen_blob = datos_personales['imagen']
@@ -322,14 +338,13 @@ def descargar_pdf():
     nombre_persona = f"{datos_personales['nombre']} {datos_personales['apellido']}"
 
     # Consulta para obtener la fila más reciente de formacion_academica
-    cursor.execute("SELECT * FROM formacion_academica ORDER BY id DESC LIMIT 1")
+    cursor.execute("SELECT * FROM formacion_academica WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_formacion_global,))
     formacion_academica = cursor.fetchone()
-    #"SELECT * FROM formacion_academica WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id,)
 
     # Consulta para obtener la fila más reciente de experiencia_laboral
-    cursor.execute("SELECT * FROM experiencia_laboral ORDER BY id DESC LIMIT 1")
+    cursor.execute("SELECT * FROM experiencia_laboral WHERE id = %s ORDER BY id DESC LIMIT 1", (id_datos_experiencia_global,))
     experiencia_laboral = cursor.fetchone()
-    #"SELECT * FROM experiencia_laboral WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id,)
+    
 
     notasFormacion_vacias = verificar_notas_formacion_vacias()
     notasExperiencia_vacias = verificar_notas_experiencia_vacias()
