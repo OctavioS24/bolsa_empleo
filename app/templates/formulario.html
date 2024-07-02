@@ -33,7 +33,13 @@
 <body>
     <main>
       <nav class="main-menu">
+        
+        <div class="container-logo-mm">
+          <img class="logo-mm" src="../static/IMG/Mejor_Malagueno_blanco.png" alt="Logo Mejor Malagueño">
+        </div>
+
         <h1>Portal de Empleo</h1>
+        
         <img class="logo" src="../static/IMG/iso blanco y.png" alt="" />
         <ul>
 
@@ -74,6 +80,14 @@
           </li>
 
         </ul>
+
+        
+        <div class="container-logo-muni">
+          <img class="logo-muni" src="../static/IMG/logo_muni_blanco.png" alt="Logo Mejor Malagueño">
+        </div>
+        
+        
+
       </nav>
 
   <section class="content">
@@ -86,7 +100,12 @@
     {% endif %}
 
 
-        <!------------------------------------------------>
+    <div class="container-titulo" style="visibility: hidden">
+      <h1>Portal de Empleo</h1>
+    </div>
+    
+
+    <!------------------------------------------------>
     <form action = "{{ url_for('registrarForm')}}" method="POST"  onsubmit="return mostrarMensajeConfirmacion()" enctype="multipart/form-data">
 
       <div class="container" id="consulata-categoria" >
@@ -594,7 +613,7 @@
                       <h2>CorBlock</h2>
                       <div class="button_ir">
                         <button class="buttons"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sergio.racigh@corblock.com&cc=&bcc=&su=CV%20[Nombre]%20[Apellido]&body=Este%20es%20el%20cuerpo%20del%20correo
-                          " target="_blank"> Ver Mas...</a></button>
+                          " target="_blank"> Enviar CV </a></button>
                       </div>
                     </div>
                     <img class="card-img" src="../static/IMG/playa corblock.png" alt="corblock" />
