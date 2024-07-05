@@ -61,10 +61,10 @@ main {
   text-align: center;
 }
 
-.logo-mm {
-  width: 80%;
+.logo-muni {
+  width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
 }
 /*------------------------------------------------------------------*/
 .container-logo-muni {
@@ -76,7 +76,7 @@ main {
   margin-bottom: 20px; 
 }
 
-.logo-muni {
+.logo-mm {
   position: absolute; 
   bottom: -30px; 
   left: 50%; 
@@ -84,8 +84,8 @@ main {
   z-index: 1000; 
 }
 
-.logo-muni img {
-  width: 100%;
+.logo-mm img {
+  width: 60%;
   height: auto;
 }
 /*------------------------------------------------------------------*/
@@ -699,7 +699,7 @@ main {
     display: none;
   }
 
-  .logo-mm {
+  .logo-muni {
     display: none;
   }
 
@@ -989,9 +989,10 @@ main {
     display: none;
   }
 
-  .logo-mm {
+  .logo-muni {
       display: block;
-      width: 150px;
+      width: 35%;
+      height: auto;
       margin: 20px auto;
   }
 
