@@ -30,28 +30,6 @@
         });
     });
 
-//----------------Funcion de mostrar formulario especifico----------------
-
-let currentFormId = null;
-
-function mostrarFormulario(formId) {
-  // Oculta todos los formularios
-  const formularios = document.querySelectorAll('.container');
-  formularios.forEach(formulario => {
-      formulario.style.display = 'none';
-  });
-  // Muestra el formulario seleccionado
-  document.getElementById(formId).style.display = 'block';
-  currentFormId = formId;
-  // Actualiza la clase activa del ícono correspondiente
-  actualizarClaseActiva(formId);
-}
-
-function mostrarElemento(id) {
-  var elemento = document.getElementById(id);
-  elemento.style.display = "block";
-}
-
 
 //----------------Funcion de mostrar formulario Siguiente----------------
 
@@ -94,3 +72,39 @@ navItem.addEventListener("click", () => {
           elementoP = document.querySelector('.msg');
           elementoP.style.display = 'none';
       }, 3000);
+
+
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Mostrar la imagen temporal
+        var imagenTemporal = document.getElementById('imagen-temporal');
+        imagenTemporal.style.display = 'block';
+    
+        // Ocultar la imagen después de 5 segundos (5000 milisegundos)
+        setTimeout(function() {
+            imagenTemporal.style.display = 'none';
+        }, 8000); // 5000 milisegundos = 5 segundos
+    });
+    
+
+//------------------------------------------------------------------------------
+
+// Obtener elementos del DOM
+const roundButton = document.querySelector('.round-button');
+const popup = document.getElementById('popup');
+const avatarButton = document.querySelector('.avatar-container');
+
+// Agregar evento de clic al botón para abrir la ventana emergente
+roundButton.addEventListener('click', () => {
+    popup.classList.add('activo');
+});
+
+// Agregar evento de clic al botón de avatar para cerrar la ventana emergente
+avatarButton.addEventListener('click', () => {
+    popup.classList.remove('activo');
+});
+
+
+
+//-------------------------------------------------------------------------------

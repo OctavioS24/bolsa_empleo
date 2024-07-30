@@ -6,7 +6,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Empleo Malagueño</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'><link rel="stylesheet" href="../static/styles.css" >
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{url_for('static', filename = 'js/script.js')}}"></script>
+  <script src="{{url_for('static', filename = 'js/validaciones.js')}}"></script>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     .msg{
@@ -29,9 +33,44 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<body>
-    <main>
+  <!--<div id="imagen-temporal">
+    <img src="../static/IMG/imagen-temporal.jpg" alt="Imagen Temporal">
+  </div>-->
+  
+
+<!-- Botón Redondo -->
+<div class="round-button">NONE</div>
+
+<!-- Popup -->
+<div id="popup" class="popup">
+    <div class="contenedor-superior">
+        <div class="avatar-container">
+            <img src="../static/IMG/avatar.png" alt="Avatar" class="avatar">
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="messages-container">
+            <div class="message-box left">
+                <p class="parrafo"><strong>¡Hola!</strong> ¿En qué puedo ayudarte Hoy?</p>
+            </div>
+            <button class="boton-bot">
+                <div class="svg-wrapper-1"><a href="http://wa.link/ppbrpf" class="linkweb" target="_blank">
+                    <div class="svg-wrapper">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                        </svg></a>
+                    </div>
+                </div>
+                <span>Abrir Chat</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!---------------------------------------------------------------------------------------------------------->
+  <main>
       <nav class="main-menu">
         
         <div class="container-logo-mm">
@@ -117,7 +156,7 @@
         <br>
         <div class="grupo">
           <label for="preferencia">Preferencia Laboral *</label>
-          <select class=" {% if error_preferencia %} error {% endif %}" name="preferencia">
+          <select name="preferencia" id="preferencia">
             <option value="" selected disabled>Selecciona una Preferencia Laboral</option>
             <option value="Administración">Administración</option>
             <option value="Atención al Cliente">Atención al Cliente</option>
@@ -130,17 +169,15 @@
             <option value="Mantenimiento y Repaparación Técnica">Mantenimiento y Repaparación Técnica</option>
             <option value="Operario, Empleado">Operario / Empleado</option>
             <!-- Agrega más opciones según sea necesario -->
-            
-        </select>
-        {% if error_preferencia %}
-        <p class="error-message"> {{ error_preferencia }} </p>
-        {% endif %}
-      </div>
-      <div class="boton">
+          </select>
+          <p class="error-message" id="error-preferencia"></p>
+        </div>
 
-          <button type="button" onclick="mostrarSiguienteFormulario('consulata-categoria', 'form1')">Siguiente</button>  
+        <div class="boton">
 
-      </div>
+            <button id="btn-siguiente-form1" class="botones" type="button" onclick="mostrarSiguienteFormulario('consulata-categoria', 'form1')" disabled>Siguiente</button>  
+
+        </div>
         </div>
 
 
@@ -157,18 +194,14 @@
                     <div class="contenedor-par">
                       <div class="grupo2">
                         <label for="nombre">Nombre (Completo)*</label>
-                        <input type="text" class="input-par" name="nombre" {% if error_nombre %} class = "error" {% endif %}>
-                        {% if error_nombre %}
-                        <p class="error-message"> {{ error_nombre }} </p>
-                        {% endif %}
+                        <input type="text" class="input-par" id="nombre" name="nombre">
+                        <p class="error-message" id="error-nombre"></p>
                     </div>
                     <!------------------------------------------------>
                     <div class="grupo2">
-                        <label for="apellido">Apellido*</label>
-                        <input type="text" class="input-par" name="apellido" {% if error_apellido %} class = "error" {% endif %}>
-                        {% if error_apellido %}
-                        <p class="error-message"> {{ error_apellido }} </p>
-                        {% endif %}
+                      <label for="apellido">Apellido*</label>
+                      <input type="text" id="apellido" name="apellido" class="input-par">
+                      <p class="error-message" id="error-apellido"></p>
                     </div>
                     </div>
                 
@@ -176,10 +209,8 @@
                 <div class="contenedor-par">
                   <div class="grupo2">
                     <label>Importe una Imagen (JPG)*</label>
-                    <input type="file" class="imagen {% if error_imagen %} error {% endif %}" name="imagen" accept="image/*" >
-                    {% if error_imagen %}
-                    <p class="error-message"> {{ error_imagen }} </p>
-                    {% endif %}
+                    <input type="file" class="imagen" id="imagen" name="imagen" accept="image/*" >
+                    <p class="error-message" id="error-imagen"> </p>
                   </div>
   
                   <div class="grupo2">
@@ -192,18 +223,14 @@
                 <div class="contenedor-par">
                   <div class="grupo2" >
                     <label for="edad">Edad*</label>
-                    <input type="number" class="input-par" name="edad" {% if error_edad %} class = "error" {% endif %}>
-                    {% if error_edad %}
-                    <p class="error-message"> {{ error_edad }} </p>
-                    {% endif %}
+                    <input type="number" id="edad" name="edad" class="input-par">
+                    <p class="error-message" id="error-edad"></p>
                 </div>
                 <!------------------------------------------------>
                 <div class="grupo2">
-                    <label for="nacimiento">Fecha de Nacimiento*</label>
-                    <input type="date" class="input-par" name="nacimiento" {% if error_nacimiento %} class = "error" {% endif %}>
-                    {% if error_nacimiento %}
-                    <p class="error-message"> {{ error_nacimiento }} </p>
-                    {% endif %}
+                  <label for="fecha-nacimiento">Fecha de Nacimiento*</label>
+                  <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="input-par">
+                  <p class="error-message" id="error-fecha"></p>
                 </div>
                 </div>
                 
@@ -212,54 +239,45 @@
                     <p>Género*
                         <br>
                         <br>
-                        <input type="radio" name="genero" value="1"> Masculino
+                        <input type="radio" id="masculino" name="genero" value="1"> Masculino
                         <br>
-                        <input type="radio" name="genero" value="2"> Femenino
+                        <input type="radio" id="femenino" name="genero" value="2"> Femenino
                         <br>
-                        <input type="radio" name="genero" value="3"> No binario
+                        <input type="radio" id="no-binario" name="genero" value="3"> No binario
                     </p>
-                    {% if error_genero %}
-                    <p class="error-message"> {{ error_genero }} </p>
-                    {% endif %}
+                    <p class="error-message" id="error_genero "></p>
+                    
                 </div>
                 <!------------------------------------------------>
                 <div class="grupo">
-                    <label for="correo">Correo Electrónico*</label>
-                    <input type="email" class="correo" name="correo" {% if error_correo %} class = "error" {% endif %}>
-                    {% if error_correo %}
-                    <p class="error-message"> {{ error_correo }} </p>
-                    {% endif %}
+                  <label for="correo">Correo Electrónico*</label>
+                  <input type="email" id="correo" name="correo" >
+                  <p class="error-message" id="error-correo"></p>
                 </div>
                     <!------------------------------------------------>
                 <div class="grupo">
-                    <label for="confirmar_correo">Confirmar Correo Electrónico*</label>
-                    <input type="email" clase="confirmar_correo" name="confirmar_correo" {% if error_correo %} class = "error" {% endif %} onpaste="return false;">
-                    {% if error_correo %}
-                    <p class="error-message"> {{ error_correo }} </p>
-                    {% endif %}
+                  <label for="confirmar_correo">Confirmar Correo Electrónico*</label>
+                  <input type="email" id="confirmar_correo" name="confirmar_correo">
+                  <p class="error-message" id="error-confirmar-correo"></p>
                 </div>
                 <!------------------------------------------------>
                 <div class="contenedor-par">
                   <div class="grupo2">
-                    <label for="calle">Calle *</label>
-                    <input type="text" name="calle" class="input-par" {% if error_calle %} error {% endif %}>
-                    {% if error_calle %}
-                    <p class="error-message"> {{ error_calle }} </p>
-                    {% endif %}
+                    <label for="calle">Calle*</label>
+                    <input type="text" id="calle" name="calle" class="input-par">
+                    <p class="error-message" id="error-calle"></p>
                   </div>
 
                   <div class="grupo2">
-                    <label for="numeracion">Nº</label>
-                    <input type="text" name="numeracion" class="input-par" {% if error_numeracion %} error {% endif %}>
-                    {% if error_numeracion %}
-                    <p class="error-message"> {{ error_numeracion }} </p>
-                    {% endif %}
+                    <label for="numeracion">Número de Calle*</label>
+                    <input type="text" id="numeracion" name="numeracion" class="input-par">
+                    <p class="error-message" id="error-numero"></p>
                   </div>
                   
                   <!------------------------------------------------>
                   <div class="grupo2">
-                      <label for="residencia">Ciudad o Barrio*</label>
-                      <select class="residencia {% if error_residencia %} error {% endif %}"  name="residencia">
+                        <label for="residencia">Ciudad o Barrio*</label>
+                        <select id="residencia"  name="residencia">
                           <option value="" selected disabled>Selecciona tu lugar de residencia</option>
                           <option value="Malagueño, Cordoba, Argentina">Malagueño, Cordoba, Argentina</option>
                           <option value="Capital, Cordoba, Argentina">Capital, Cordoba, Argentina</option>
@@ -277,12 +295,12 @@
                           <option value="La Cañitas, Malagueño, Cordoba, Argentina">La Cañitas, Malagueño, Cordoba, Argentina</option>
                           <option value="Padre Carlos Marella, Malagueño, Cordoba, Argentina">Primero de Mayo, Malagueño, Cordoba, Argentina</option>
                           <option value="Primero de Mayo, Malagueño, Cordoba, Argentina">Primero de Mayo, Malagueño, Cordoba, Argentina</option>
-                          <option value="Punta del Agua, Malagueño, Cordoba, Argentina">Punta del Agua, Malagueño, Cordoba, Argentina</option>
+                          <option value="Punta de Agua, Malagueño, Cordoba, Argentina">Punta de Agua, Malagueño, Cordoba, Argentina</option>
                           <option value="San Nicolas, Malagueño, Cordoba, Argentina">San Nicolas, Malagueño, Cordoba, Argentina</option>
                           <option value="San Francisco, Malagueño, Cordoba, Argentina">San Francisco, Malagueño, Cordoba, Argentina</option>
                           <option value="Santa Barbara, Malagueño, Cordoba, Argentina">Santa Barbara, Malagueño, Cordoba, Argentina</option>
                           <option value="Sierra de Oro, Malagueño, Cordoba, Argentina">Sierra de Oro, Malagueño, Cordoba, Argentina</option>
-                          <option value="Tejas 5, Malagueño, Cordoba, Argentina">Tejas 5, Malagueño, Cordoba, Argentina</option>
+                          <option value="Tejas 4, Malagueño, Cordoba, Argentina">Tejas 4, Malagueño, Cordoba, Argentina</option>
                           <option value="Tejas 3, Malagueño, Cordoba, Argentina">Tejas 3, Malagueño, Cordoba, Argentina</option>
                           <option value="Tierra Alta, Malagueño, Cordoba, Argentina">Tierra Alta, Malagueño, Cordoba, Argentina</option>
                           <option value="Torre Milenicas, Malagueño, Cordoba, Argentina">Torre Milenicas, Malagueño, Cordoba, Argentina</option>
@@ -291,19 +309,15 @@
                           <option value="Yocsina, Malagueño, Cordoba, Argentina">Yocsina, Malagueño, Cordoba, Argentina</option>
                           <!-- Agrega más opciones según sea necesario -->
                       </select>
-                      {% if error_residencia %}
-                      <p class="error-message"> {{ error_residencia }} </p>
-                      {% endif %}
+                      <p class="error-message" id="error_residencia "></p>
                   </div>
                 </div>
                 
                 <!------------------------------------------------>
                 <div class="grupo">
-                    <label for="telefono">Teléfono*</label>
-                    <input type="tel" class="telefono" name="telefono" placeholder="Ej: 3510001111" {% if error_telefono %} class = "error" {% endif %}>
-                    {% if error_telefono %}
-                    <p class="error-message"> {{ error_telefono }} </p>
-                    {% endif %}
+                  <label for="telefono">Teléfono*</label>
+                  <input type="tel" id="telefono" name="telefono">
+                  <p class="error-message" id="error-telefono"></p>
                 </div>
                 <!------------------------------------------------>
 
@@ -317,9 +331,8 @@
                   <input type="radio" name="idioma" value="3"> Inglés Intermedio
                   <br>
                   <input type="radio" name="idioma" value="4"> Inglés Avanzado 
-                  {% if error_idioma %}
-                  <p class="error-message"> {{ error_idioma }} </p>
-                  {% endif %}
+
+                  <p class="error-message" id="error-idioma"></p>
                 </div>
 
                 <!------------------------------------------------>
@@ -340,8 +353,8 @@
                 </div>
 
                 <br>
-                <button type="button" onclick="mostrarAnteriorFormulario('form1', 'consulata-categoria')">Atrás</button>
-                <button class="button-siguiente" type="button" onclick="mostrarSiguienteFormulario('form1', 'form2')">Siguiente</button>
+                <button class="botones" type="button" onclick="mostrarAnteriorFormulario('form1', 'consulata-categoria')">Atrás</button>
+                <button id="btn-siguiente-form2"  class="botones" type="button" onclick="mostrarSiguienteFormulario('form1', 'form2')" disabled>Siguiente</button>
                 <br>
                 
                 </div>
@@ -367,16 +380,14 @@
                         <br>
                         <br>
                         <div class="grupo">
-                            <label for="institucion">Institución Educativa *</label>
-                            <input type="text" class="institucion" name="institucion"  {% if error_institucion %} class = "error" {% endif %}>
-                            {% if error_institucion %}
-                            <p class="error-message"> {{ error_institucion }} </p>
-                            {% endif %}
+                          <label for="institucion">Institución Educativa *</label>
+                          <input type="text" id="institucion" name="institucion">
+                          <p id="error-institucion" class="error-message"></p>
                         </div>
                     <!------------------------------------------------>
                         <div class="grupo">
                             <label for="especialidad">Especialidad *</label>
-                            <select class="especialidad {% if error_especialidad %} error {% endif %}" name="especialidad">
+                            <select id="especialidad" name="especialidad">
                               <option value="" selected disabled>Selecciona una Especialidad</option>
                               <option value="Informática">Informática</option>
                               <option value="Economía y Administración">Economía y Administración</option>
@@ -386,48 +397,40 @@
                               <option value="Otro">Otro</option>
                               <!-- Agrega más opciones según sea necesario -->
                           </select>
-                          {% if error_especialidad %}
-                          <p class="error-message"> {{ error_especialidad }} </p>
-                          {% endif %}
+                          <p id="error-especialidad" class="error-message"></p>
                         </div>
                     <!------------------------------------------------>
-                    <div class="contenedor-par">
-                      <div class="grupo2">
-                        <label for="inicio">Inicio *</label>
-                        <input type="date" class="input-par" name="inicio" {% if error_inicio %} class = "error" {% endif %}>
-                        {% if error_inicio %}
-                        <p class="error-message"> {{ error_inicio }} </p>
-                        {% endif %}
-                    </div>
-                <!------------------------------------------------>
-                    <div class="grupo2">
-                        <label for="fin">Fin *</label>
-                        <input type="date" class="input-par" name="fin" {% if error_fin %} class = "error" {% endif %}>
-                        {% if error_fin %}
-                        <p class="error-message"> {{ error_fin }} </p>
-                        {% endif %}
-                    </div>
-                    </div>
+                        <div class="contenedor-par">
+                          <div class="grupo2">
+                            <label for="inicio">Inicio *</label>
+                            <input type="date" id="inicio" name="inicio">
+                            <p id="error-inicio" class="error-message"></p>
+                        </div>
+                    <!------------------------------------------------>
+                        <div class="grupo2">
+                          <label for="fin">Fin *</label>
+                          <input type="date" id="fin" name="fin">
+                          <p class="error-message" id="error-fin" ></p>
+                        </div>
+                        </div>
                         
                     <!------------------------------------------------>
                     <div class="grupoGenero">
                         <p>Formación Académca *
                             <br>
                             <br>
-                            <input type="radio" class="grado" name="grado" value="1"> Secundario
+                            <input type="radio" id="secundario"  class="grado" name="grado" value="1"> Secundario
                             <br>
-                            <input type="radio" class="grado" name="grado" value="2"> Pre-grado
+                            <input type="radio" id="pregrado"  class="grado" name="grado" value="2"> Pre-grado
                             <br>
-                            <input type="radio" class="grado" name="grado" value="3"> Terciario
+                            <input type="radio" id="terciario" class="grado" name="grado" value="3"> Terciario
                             <br>
-                            <input type="radio" class="grado" name="grado" value="4"> Grado
+                            <input type="radio" id="grado" class="grado" name="grado" value="4"> Grado
                             <br>
-                            <input type="radio" class="grado" name="grado" value="5"> Post-grado
+                            <input type="radio" id="postgrado"  class="grado" name="grado" value="5"> Post-grado
                             <br>
                         </p>
-                        {% if error_grado %}
-                        <p class="error-message"> {{ error_grado }} </p>
-                        {% endif %}
+                        <p class="error-message" id="error-formacion" ></p>
                     </div>
                     <!------------------------------------------------>
                     <br>
@@ -438,16 +441,14 @@
                     <!------------------------------------------------>
                     <div class="grupo">
                       <label for="notasFormacion">Formación Adicional:</label>
-                      <textarea class="notasFormacion {% if error_notasFormacion %} error {% endif %}"  name="notasFormacion" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
-                      {% if error_notasFormacion %}
-                      <p class="error-message"> {{ error_notasFormacion }} </p>
-                      {% endif %}
+                      <textarea id="notasFormacion" name="notasFormacion" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
+                      <p id="error-notasFormacion" class="error-message"></p>
                     </div>
                     <!------------------------------------------------>
                     <div class="boton">
 
-                      <button type="button" onclick="mostrarAnteriorFormulario('form2', 'form1')">Atrás</button>
-                        <button type="button" onclick="mostrarSiguienteFormulario('form2', 'form3')">Siguiente</button>  
+                      <button class="botones"  type="button" onclick="mostrarAnteriorFormulario('form2', 'form1')">Atrás</button>
+                        <button id="btn-siguiente-form3" class="botones"  type="button" onclick="mostrarSiguienteFormulario('form2', 'form3')" disabled>Siguiente</button>  
 
                     </div>
                     <!------------------------------------------------>
@@ -474,45 +475,35 @@
                       <br>
                   <!------------------------------------------------>
                       <div class="grupo">
-                          <label for="empresa">Empresa *</label>
-                          <input type="text" class="empresa" name="empresa" {% if error_empresa %} class = "error" {% endif %}>
-                          {% if error_empresa %}
-                          <p class="error-message"> {{ error_empresa }} </p>
-                          {% endif %}
+                        <label for="empresa">Empresa*</label>
+                        <input type="text" id="empresa" name="empresa">
+                        <p id="error-empresa" class="error-message"></p>
                       </div>
                       <!------------------------------------------------>
                       <div class="grupo">
-                        <label for="descripcion">Rol Desempeñado *</label>
-                        <input class="descripcion" name="descripcion" {% if error_descripcion %} class = "error" {% endif %}  ></input>
-                        {% if error_descripcion %}
-                        <p class="error-message"> {{ error_descripcion }} </p>
-                        {% endif %}
-                    </div>
+                        <label for="descripcion">Rol Desempeñado*</label>
+                        <input type="text" id="descripcion" name="descripcion">
+                        <p id="error-descripcion" class="error-message"></p>
+                      </div>
 
                       <!------------------------------------------------>
                       <div class="grupo">
-                          <label for="tareas">Resumen de Tareas Desempeñadas *</label>
-                          <textarea class="tareas" name="tareas" {% if error_tareas %} class = "error" {% endif %} placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
-                          {% if error_tareas %}
-                          <p class="error-message"> {{ error_tareas }} </p>
-                          {% endif %}
+                        <label for="tareas">Resumen de Tareas Desempeñadas*</label>
+                        <textarea id="tareas" name="tareas"></textarea>
+                        <p id="error-tareas" class="error-message"></p>
                       </div>
                       <!------------------------------------------------>
                       <div class="contenedor-par">
                         <div class="grupo2">
-                          <label for="desde">Desde *</label>
-                          <input type="date" class="input-par" name="desde" {% if error_desde %} class = "error" {% endif %}>
-                          {% if error_desde %}
-                          <p class="error-message"> {{ error_desde }} </p>
-                          {% endif %}
+                          <label for="desde">Desde*</label>
+                          <input type="date" id="desde" name="desde">
+                          <p id="error-desde" class="error-message"></p>
                       </div>
                       <!------------------------------------------------>
                       <div class="grupo2">
-                              <label for="hasta">Hasta *</label>
-                              <input type="date" class="input-par" name="hasta"  {% if error_hasta %} class = "error" {% endif %}>
-                              {% if error_hasta %}
-                              <p class="error-message"> {{ error_hasta }} </p>
-                              {% endif %}
+                        <label for="hasta">Hasta*</label>
+                        <input type="date" id="hasta" name="hasta">
+                        <p id="error-hasta" class="error-message"></p>
                       </div>
                       </div>
                       
@@ -527,15 +518,13 @@
 
                       <div class="grupo">
                         <label for="notasExperiencia">Experiencia Adicional:</label>
-                        <textarea class="notasExperiencia {% if error_notasExperiencia %} error {% endif %}" name="notasExperiencia" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
-                        {% if error_notasExperiencia %}
-                        <p class="error-message"> {{ error_notasExperiencia }} </p>
-                        {% endif %}
+                        <textarea class="notasExperiencia" name="notasExperiencia" placeholder="Debe contener menos de 400 caracteres" rows="8" cols="40"></textarea>
+                        <p class="error-message" id="error-notasExperiencia"></p>
                       </div>
                       <!------------------------------------------------>
                       <br>
-                      <button type="button" onclick="mostrarAnteriorFormulario('form3', 'form2')">Atrás</button> 
-                      <input class="button-confirmar" type="submit" value="Confirmar">
+                      <button class="botones" type="button" onclick="mostrarAnteriorFormulario('form3', 'form2')">Atrás</button> 
+                      <input id="btn-siguiente-form4" class="button-confirmar" type="submit" value="Confirmar" required>
                       <br>
                 </div>
 
@@ -619,9 +608,8 @@
                   
       </section>
     </main>
-    
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{url_for('static', filename = 'js/script.js')}}"></script>
+
 
   </body>
+</html>

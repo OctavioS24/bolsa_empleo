@@ -198,7 +198,7 @@ body {
   /*----------------------------------------------------------*/
   
   /* Estilos base para los botones */
-  button, .button-confirmar {
+  .botones, .button-confirmar  {
     width: auto; /* Cambiado a ancho automático */
     max-width: 100%; /* El botón no excederá el ancho del contenedor */
     background-color: #338c36;
@@ -210,9 +210,10 @@ body {
     margin: 10px;
     box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
   }
+
   
   /* Estilos para los botones cuando se les hace hover */
-  button:hover, .button-confirmar:hover {
+  .botones:hover, .button-confirmar:hover {
     opacity: 0.8; /* Cambiado a 0.8 para que la opacidad sea un valor decimal */
   }
   
@@ -236,26 +237,48 @@ body {
     padding: 10px;
   }
   /*----------------------------------------------------------*/
-  
+
+  /* Estilo del mensaje de error */
+
   input.error {
     border: 1px solid red;
+    box-shadow: 0 0 5px red; 
   }
-  
-  textarea.error {
-    border: 1px solid red;
-  }
-  
-  .residencia.error {
-    border: 1px solid red;
-  }
-  
-  /* Estilo del mensaje de error */
+
   .error-message {
     color: red;
     font-size: 10px;
-    margin-top: 3px; /* Espacio superior para separar el mensaje del campo de entrada */
+    margin-top: 3px; 
   }
+
+  .input-par.error {
+    border: 1px solid red;
+}
   
+  .grupoGenero .error-message {
+    color: red;
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  .grupo .error{
+    color: red;
+    border: 1px solid red;
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  textarea.error {
+    border: 1px solid red; /* Borde rojo para indicar error */
+    outline: none; /* Elimina el outline predeterminado que puede interferir */
+    box-shadow: 0 0 5px red; /* Sombreado rojo para resaltar */
+  }
+
+  select.error {
+    border: 1px solid red; 
+    box-shadow: 0 0 5px red; 
+  }
+
   /*----------------------------------------------------------*/
   
   textarea {
@@ -333,9 +356,10 @@ body {
           font-size: 1.0rem;
       }
     
-      button, .button-confirmar {
+      .botones, .button-confirmar {
           width: 100%;
       }
+
     
       .separador {
           display: none;
@@ -441,7 +465,7 @@ body {
           width: 100%; /* Botón de ancho completo */
       }
     
-      button, .button-confirmar {
+      .botones, .button-confirmar {
           width: 100%; /* Ancho completo para botones */
           margin: 10px 0; /* Margen vertical para separación */
       }

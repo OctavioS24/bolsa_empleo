@@ -10,6 +10,225 @@
   margin: 0;
 }
 
+
+#imagen-temporal {
+  display: none; /* La imagen estará oculta inicialmente */
+  position: fixed; /* Para que el div esté fijo en la ventana */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  z-index: 9999; /* Aseguramos que esté por encima de cualquier otro contenido */
+  text-align: center; /* Centra horizontalmente el contenido */
+}
+
+#imagen-temporal img {
+  max-width: 25%; /* Ancho máximo de la imagen */
+  max-height: auto; /* Altura máxima de la imagen */
+  margin-top: 2%; /* Margen superior para centrar verticalmente */
+  border-radius: 10px; /* Borde redondeado opcional */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Sombra alrededor de la imagen */
+  }
+
+/*----------------------------------------------------------------------------------------*/
+.round-button {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: url("../static/IMG/BOTWEB.png");
+  background-size: cover;
+  background-position: center;
+  color: transparent;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 2px solid #38b825; /* Asegura que el borde sea visible */
+  z-index: 1000; /* Asegura que esté por debajo del popup */
+  transition: background-image 0.3s ease; /* Transición suave para el cambio de imagen */
+}
+
+.round-button:hover {
+  background-image: url("../static/IMG/BOTWEB_!.png"); /* Cambia la imagen al hacer hover */
+}
+
+.popup {
+  position: fixed; /* Fija el popup en la ventana */
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  display: none;
+  cursor: pointer;
+  z-index: 1100; /* Asegura que esté por encima del botón redondo */
+  transition: opacity 0.3s ease; /* Transición suave para la aparición/desaparición */
+}
+
+.popup.activo {
+  display: block;
+}
+
+.contenedor-superior {
+  display: flex;
+  justify-content: space-between; /* Alinear a la izquierda y derecha */
+  align-items: center;
+  width: 100%;
+}
+
+.avatar-container {
+  position: relative;
+  margin-left: auto; /* Alinear a la derecha */
+  width: fit-content; /* Ajustar ancho automáticamente */
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer; /* Convertir el avatar en un cursor */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.boton-bot {
+  font-family: Ubuntu;
+  font-size: 14px;
+  background: linear-gradient(to bottom, #38b825 0%, #44d944 100%);
+  color: white;
+  padding: 0.8em 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+  margin-left: 100px;
+  margin-top: 20px;
+  cursor: pointer; /* Asegurar que tenga un cursor */
+}
+
+.boton-bot:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  padding: 0em;
+  background: linear-gradient(to bottom, #31ca31 0%, #62cc74 100%);
+}
+
+.boton-bot:active {
+  transform: scale(0.95);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.boton-bot span {
+  display: block;
+  margin-left: 0.4em;
+  transition: all 0.3s;
+}
+
+.boton-bot:hover span {
+  scale: 0;
+  font-size: 0%;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.boton-bot svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+  transition: all 0.3s;
+}
+
+.boton-bot .svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.boton-bot:hover .svg-wrapper {
+  background-color: rgba(48, 170, 55, 0.897);
+  width: 54px;
+  height: 54px;
+}
+
+.boton-bot:hover svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  transform: rotate(45deg);
+}
+
+.card-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.messages-container {
+  padding: 15px;
+}
+
+.message-box {
+  font-family: Ubuntu;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.parrafo {
+  font-family: Ubuntu;
+  font-size: 10px;
+}
+
+.message-box.left {
+  font-family: Ubuntu;
+  font-size: 18px;
+  background-color: #f1f1f1;
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+  left: 0;
+}
+
+.linkweb {
+  text-decoration: white;
+}
+
+#svg-wrapper-1 {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: #fff;
+}
+
+a {
+  color: #fff;
+}
+
+
+
+/*----------------------------------------------------------------------------------------*/
+
+
+
+
 nav {
   user-select: none;
   -webkit-user-select: none;
@@ -606,28 +825,15 @@ main {
   text-transform: uppercase;
 }
 
-.calendar .buttons {
+.buttons {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.calendar .buttons button {
-  width: 25px;
-  height: 25px;
-  border: none;
+  background-color: #338c36;
   border-radius: 5px;
-  background: #338c36;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  border: none;
 }
 
-.calendar .buttons button:hover {
-  background: #28772b;
-}
 
 /* TASKS */
 
@@ -691,6 +897,11 @@ main {
 
 
 @media (max-width: 1500px) {
+
+  #imagen-temporal img {
+    max-width: 28%;
+}
+
   main {
     grid-template-columns: 6% 94%;
   }
@@ -728,6 +939,11 @@ main {
 }
 
 @media (max-width: 1380px) {
+
+  #imagen-temporal img {
+    max-width: 30%;
+}
+
   main {
     grid-template-columns: 8% 92%;
     margin: 30px;
@@ -760,6 +976,11 @@ main {
 }
 
 @media (max-width: 1150px) {
+
+  #imagen-temporal img {
+    max-width: 35%;
+}
+
   .content {
     grid-template-columns: 60% 40%;
   }
@@ -826,6 +1047,11 @@ main {
 }
 
 @media (max-width: 1050px) {
+
+  #imagen-temporal img {
+    max-width: 50%;
+}
+
 	 .right-content {
       grid-template-rows: 4% 26% 37% 40%;
   }
@@ -864,6 +1090,19 @@ main {
 
 
 @media (max-width: 900px) {
+
+  #imagen-temporal {
+    text-align: center;
+    padding: 20px; /* Añade un poco de espacio alrededor de la imagen en móviles */
+}
+
+#imagen-temporal img {
+    max-width: 80%;
+    max-height: 80%;
+    margin-top: 10%;
+}
+
+
   body {
     background-image: none;
     margin: 0;
@@ -969,6 +1208,11 @@ main {
 
 
 @media (max-width: 500px) {
+
+  #imagen-temporal img {
+    max-width: 65%;
+}
+
   body {
     background-image: none;
     margin: 0px;
@@ -1071,3 +1315,106 @@ main {
     margin: 0 auto;
   }
 }
+
+@media (max-width: 450px) {
+  #imagen-temporal {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+#imagen-temporal img {
+    max-width: 70%;
+    max-height: 70vh; /* Altura máxima del 70% del alto de la ventana */
+    border-radius: 10px; /* Borde redondeado opcional */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Sombra alrededor de la imagen */
+}
+}
+
+
+
+/*
+@media (max-width: 1500px) {
+  .round-button {
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+  }
+
+  .boton-bot {
+    margin-left: 110px;
+  }
+}
+
+@media (max-width: 1380px) {
+  .round-button {
+    width: 110px;
+    height: 110px;
+    line-height: 110px;
+  }
+
+  .boton-bot {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .round-button {
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+  }
+
+  .boton-bot {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 910px) {
+  .round-button {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+  }
+
+  .boton-bot {
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 900px) {
+  .round-button {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+  }
+
+  .boton-bot {
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .round-button {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
+
+  .boton-bot {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 450px) {
+  .round-button {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .boton-bot {
+    margin-left: 30px;
+  }
+}
+*/
